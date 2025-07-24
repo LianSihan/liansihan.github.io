@@ -47,28 +47,29 @@ page1btn.addEventListener("click", function () {
 page2btn.addEventListener("click", function () {
     show(2);
     navMenu.classList.remove("menuShow");
-    typeWriter(title, bar, 'Major Dynasties', 150);
+    typeWriter(title, bar, 'Major Dynasties', 125);
+    calculateAndSetHeight();
 });
 page3btn.addEventListener("click", function () {
     show(3);
     navMenu.classList.remove("menuShow");
-    typeWriter(title, bar, 'Famous Inventions', 150);
-
+    typeWriter(title, bar, 'Famous Inventions', 125);
 });
 page4btn.addEventListener("click", function () {
     show(4);
     navMenu.classList.remove("menuShow");
     const ballContainerStyle = getComputedStyle(ballContainer);
     ballContainerWidth = ballContainer.offsetWidth - parseFloat(ballContainerStyle.paddingLeft) - parseFloat(ballContainerStyle.paddingRight) - ball.offsetWidth;
-    typeWriter(title, bar, 'Silk Road & Trade', 150);
+    typeWriter(title, bar, 'Silk Road & Trade', 100);
+    UpdateBallContentAndImage();
 });
 page5btn.addEventListener("click", function () {
     show(5);
     navMenu.classList.remove("menuShow");
-    typeWriter(title, bar, 'Ancient Chinese Culture', 150);
+    typeWriter(title, bar, 'Ancient Chinese Culture', 100);
 });
 hideall();
-show(1);
+show(3);
 
 const hamBtn = document.getElementById("hamIcon"); // the button
 const navMenu = document.getElementById("sideMenu"); // the menu to show/hide
@@ -189,12 +190,34 @@ document.getElementById('closebutton').addEventListener('click', () => {
 });
 
 
-document.querySelectorAll('.blockingtile').forEach(tile => {
+const tiles = document.querySelectorAll('.blockingtile');
+tiles.forEach(tile => {
     tile.addEventListener('click', () => {
         tile.classList.add('gone');
     });
 });
 
+const page3Reset = document.querySelector('#inventions > button');
+page3Reset.addEventListener('click', () => {
+    tiles.forEach(tile => {
+        tile.classList.remove('gone');
+    });
+});
+
+const inventions = document.querySelector('#inventions');
+const quizButton = document.querySelector('#quizButton > button');
+const quiz = document.querySelector('#quiz');
+
+quizButton.addEventListener('click', () => {
+    quiz.classList.toggle('gone');
+    inventions.classList.toggle('gone');
+    if (quiz.classList.contains('gone')) {
+        quizButton.textContent = 'Enter Quiz';
+    } 
+    else {
+        quizButton.textContent = 'Exit Quiz';
+    }
+});
 
 
 const popAudio = new Audio("popsound.mp3");
@@ -286,6 +309,105 @@ function MoveDurian() {
 
 
 
+
+
+
+const submit = document.querySelector("#quizSubmit");
+const reset = document.querySelector("#quizReset");
+const quizResult = document.querySelector("#quizResult");
+const q2Ans = ["Compass", "Gunpowder", "Papermaking", "Printing"];
+
+let score = 0;
+
+submit.addEventListener("click", CheckAns);
+
+function CheckAns() {
+    score = 0;
+    const q1 = document.querySelector('input[name="q1"]').value.trim();
+    if (q1 === "4") {
+        score++;
+    }
+
+    const q2 = document.querySelectorAll('input[name="q2"]:checked');
+    const selected = [];
+    for (let chosen of q2) {
+        selected.push(chosen.value);
+    }
+
+    let correct = true;
+    for (let ans of q2Ans) {
+        if (!selected.includes(ans)) {
+            correct = false;
+            break;
+        }
+    }
+
+    if (correct && selected.length === q2Ans.length) {
+        score++;
+    }
+
+    const q3 = document.querySelector('input[name="q3"]').value.trim().toLowerCase();
+    if (q3 === "han") {
+        score++;
+    }
+
+    const q4 = document.querySelector('input[name="q4"]:checked');
+    if (q4) {
+        if (q4.value === "Tang") {
+        score++;
+        }
+    }
+
+    const q5 = document.querySelector('select[name="q5"]');
+    if (q5.value === "Cai Lun") {
+        score++;
+    }
+
+    const q6 = document.querySelector('select[name="q6"]');
+    if (q6.value === "Tang Dynasty") {
+        score++;
+    }
+
+    quizResult.innerHTML = `<h2>Your Score: ${score}/6</h2>`;
+}
+
+reset.addEventListener("click", () => {
+    // Reset all input fields
+    document.querySelectorAll("input").forEach(input => {
+        if (input.type === "checkbox" || input.type === "radio") {
+            input.checked = false;
+        } else {
+            input.value = "";
+        }
+    });
+
+    // Reset all select dropdowns
+    document.querySelectorAll("select").forEach(select => {
+        select.selectedIndex = 0;
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*find references to all the buttons and ball */
 const leftBtn = document.querySelector("#leftBtn");
 const rightBtn = document.querySelector("#rightBtn");
@@ -356,7 +478,11 @@ const regionInfo = {
     title: "China - The Birthplace of Silk and Innovation",
     description: "China was the eastern origin of the Silk Road and the world's sole producer of silk for centuries. The trade routes began in Chang'an (now Xi'an), capital of multiple Chinese dynasties.",
     exports: "Silk, porcelain, tea, paper, gunpowder, compass",
+    exportsHeader: "Key Exports",
+    exportsDescription: "China's monopoly on silk production made it the most coveted luxury item worldwide, while their revolutionary inventions like gunpowder, paper, and the compass fundamentally changed how people lived, communicated, and navigated across continents.",
     culture: "Buddhism spread, inventions, Confucian ideas",
+    cultureHeader: "Cultural Contributions",
+    cultureDescription: "Chinese technological innovations revolutionized warfare, navigation, and knowledge preservation globally, while Buddhist and Confucian philosophies provided new frameworks for governance, ethics, and spiritual understanding that shaped entire civilizations from Korea to Central Asia.",
     img: "images/china emoji.png",
     exportsImage: "images/China.png",
     cultureImage: "images/China.png",
@@ -365,8 +491,12 @@ const regionInfo = {
   "India": {
     title: "India - The Spiritual and Spicy Connector",
     description: "India was a cultural and trade crossroads of East and West. It participated in both land and maritime Silk Road routes.",
-    exports: "Spices, textiles, gemstones, ivory",
-    culture: "Hinduism, Buddhism, mathematics, medicine, art",
+    exports: "Spices, textiles, gemstones, ivory, cotton, indigo dye",
+    exportsHeader: "Key Exports",
+    exportsDescription: "India's aromatic spices like black pepper, cinnamon, and cardamom were literally worth their weight in gold, driving European exploration for centuries, while precious gemstones, fine cotton textiles, and indigo dye became status symbols across the ancient world.",
+    culture: "Hinduism, Buddhism, mathematics, medicine, art, astronomy",
+    cultureHeader: "Cultural Contributions",
+    cultureDescription: "Indian mathematical concepts including the decimal system and zero revolutionized global mathematics, while Ayurvedic medicine and surgical techniques advanced healthcare, and Hindu-Buddhist art styles influenced temple architecture from Southeast Asia to Central Asia.",
     img: "images/india emoji.png",
     exportsImage: "images/China.png",
     cultureImage: "images/China.png",
@@ -375,8 +505,12 @@ const regionInfo = {
   "Uzbekistan": {
     title: "Uzbekistan - Oasis Cities of Central Asia",
     description: "Uzbekistan's cities like Samarkand and Bukhara were caravan hubs where traders from China, India, Persia converged.",
-    exports: "Safe stops, market centers",
-    culture: "Islamic learning, arts, Persian-Chinese exchange",
+    exports: "Horses, metalwork, leather goods, dried fruits",
+    exportsHeader: "Key Exports",
+    exportsDescription: "Central Asian horses were crucial for military campaigns and long-distance travel, while expert metalworkers produced weapons and tools that were traded across continents, and dried fruits provided essential nutrition for grueling caravan journeys through harsh desert terrain.",
+    culture: "Islamic learning, arts, Persian-Chinese cultural exchange, trade facilitation",
+    cultureHeader: "Cultural Role",
+    cultureDescription: "The great cities of Samarkand and Bukhara became prestigious centers of Islamic scholarship where Persian poetry merged with Chinese philosophy, creating unique architectural styles and fostering the translation movement that preserved and transmitted ancient Greek and Indian knowledge to the world.",
     img: "images/uzbekistan emoji.png",
     exportsImage: "images/China.png",
     cultureImage: "images/China.png",
@@ -384,9 +518,13 @@ const regionInfo = {
   },
   "Persia": {
     title: "Persia - The Imperial Bridge Between Worlds",
-    description: "Persia controlled many crucial Silk Road sections, linking East and West.",
-    exports: "Rugs, wine, pearls, perfume oils",
-    culture: "Literature, infrastructure, Zoroastrianism",
+    description: "Persia controlled many crucial Silk Road sections, linking East and West through its vast empire.",
+    exports: "Persian rugs, wine, pearls, perfume oils, metalwork, glass",
+    exportsHeader: "Key Exports",
+    exportsDescription: "Persian carpets became symbols of wealth and sophistication in palaces from China to Europe, while their fine wines, lustrous pearls from the Persian Gulf, and exquisite perfume oils set the standards for luxury goods that influenced court culture across three continents.",
+    culture: "Literature, infrastructure development, Zoroastrianism, Persian art and poetry",
+    cultureHeader: "Cultural Contributions",
+    cultureDescription: "Persian engineers built the world's most advanced road systems and caravanserais that enabled safe long-distance trade, while Persian literature and poetry became the lingua franca of educated elites from Turkey to India, and Zoroastrian concepts of good versus evil influenced major world religions.",
     img: "images/persia emoji.png",
     exportsImage: "images/China.png",
     cultureImage: "images/China.png",
@@ -394,9 +532,13 @@ const regionInfo = {
   },
   "Turkey": {
     title: "Turkey - The Continental Gateway",
-    description: "Turkey was home to Constantinople, at the nexus of Asia and Europe.",
-    exports: "Spices, silks, Mediterranean products",
-    culture: "Byzantine, Christian and Islamic culture blend",
+    description: "Turkey was home to Constantinople, the crucial link between Asia and Europe, controlling access to European markets.",
+    exports: "Processed goods, wine, olive oil, Byzantine crafts",
+    exportsHeader: "Key Exports",
+    exportsDescription: "Constantinople's strategic position allowed it to control and tax all goods flowing between Asia and Europe, while Byzantine artisans refined Eastern silk and spices into luxury products that commanded premium prices in European markets.",
+    culture: "Byzantine heritage, blend of Christian and Islamic cultures, architectural innovations",
+    cultureHeader: "Cultural Contributions",
+    cultureDescription: "As the last remnant of the Roman Empire, Byzantium preserved classical Greek and Roman knowledge while absorbing Islamic innovations, creating magnificent architectural wonders like the Hagia Sophia that influenced both Eastern Orthodox and Islamic building traditions for centuries.",
     img: "images/turkey emoji.png",
     exportsImage: "images/China.png",
     cultureImage: "images/China.png",
@@ -404,9 +546,13 @@ const regionInfo = {
   },
   "Italy": {
     title: "Italy - The European Endpoint",
-    description: "Italy's ports were the main recipients of Eastern goods.",
-    exports: "Silk, spices, porcelain, gems",
-    culture: "Renaissance, maritime exploration, luxury economy",
+    description: "Italy's merchant republics like Venice and Genoa were the main European recipients and distributors of Eastern goods.",
+    exports: "European manufactured goods, wine, olive oil, glass (Venetian)",
+    exportsHeader: "Key Exports to East",
+    exportsDescription: "Italy traded European products eastward while importing Asian luxuries.",
+    culture: "Renaissance funding through trade wealth, maritime exploration, luxury culture development",
+    cultureHeader: "Cultural Impact",
+    cultureDescription: "Silk Road wealth fueled the Renaissance and European exploration age.",
     img: "images/italy emoji.png",
     exportsImage: "images/China.png",
     cultureImage: "images/China.png",
@@ -414,15 +560,18 @@ const regionInfo = {
   }
 };
 
+
 let currentImage = "images/china emoji.png";
 ballContent.innerHTML = `
-            <h1>${regionInfo["China"].title}</h1>
-            <p>${regionInfo["China"].description}</p>
-            <aside><img src="${regionInfo["China"].exportsImage}" alt="exports Image"></aside>
-            <article><b>Key Exports</b><p>${regionInfo["China"].exports}</p></article>
-            <article><b>Cultural Contributions</b><p>${regionInfo["China"].culture}</p></article>
-            <aside><img src="${regionInfo["China"].cultureImage}" alt="culture Image"></aside>
-            `;
+    <h1>${regionInfo["China"].title}</h1>
+    <p>${regionInfo["China"].description}</p>
+    <aside><img src="${regionInfo["China"].exportsImage}" alt="exports Image"></aside>
+    <article><b>${regionInfo["China"].exportsHeader}</b><p>${regionInfo["China"].exports}</p>
+    <p class="description">${regionInfo["China"].exportsDescription}</p></article>
+    <article><b>${regionInfo["China"].cultureHeader}</b><p>${regionInfo["China"].culture}</p>
+    <p class="description">${regionInfo["China"].cultureDescription}</p></article>
+    <aside><img src="${regionInfo["China"].cultureImage}" alt="culture Image"></aside>
+`;
 
 function UpdateBallContentAndImage() {
     const cutOff = ballContainerWidth / 5;
@@ -488,12 +637,14 @@ function UpdateBallContentAndImage() {
             ballImage.style.filter = info.emoji.filter;
             currentImage = info.img;
             ballContent.innerHTML = `
-            <h1>${info.title}</h1>
-            <p>${info.description}</p>
-            <aside><img src="${info.exportsImage}" alt="exports Image"></aside>
-            <article><b>Key Exports</b> <p>${info.exports}</p></article>
-            <article><b>Cultural Contributions</b> <p>${info.culture}</p></article>
-            <aside><img src="${info.cultureImage}" alt="culture Image"></aside>
+                <h1>${info.title}</h1>
+                <p>${info.description}</p>
+                <aside><img src="${info.exportsImage}" alt="exports Image"></aside>
+                <article><b>${info.exportsHeader}</b> <p>${info.exports}</p>
+                <p class="description">${info.exportsDescription}</p></article>
+                <article><b>${info.cultureHeader}</b> <p>${info.culture}</p>
+                <p class="description">${info.cultureDescription}</p></article>
+                <aside><img src="${info.cultureImage}" alt="culture Image"></aside>
             `;
             ballImage.style.opacity = 1;
             ballImage.style.transform = "scale(1)";
@@ -503,13 +654,13 @@ function UpdateBallContentAndImage() {
 
 
 
-
 window.addEventListener('resize', function () {
     let ratio = ballX / ballContainerWidth;
     const ballContainerStyle = getComputedStyle(ballContainer);
     ballContainerWidth = ballContainer.offsetWidth - parseFloat(ballContainerStyle.paddingLeft) - parseFloat(ballContainerStyle.paddingRight) - ball.offsetWidth;
     ballX = (ballContainerWidth * ratio);
     UpdateBallStyle();
+    calculateAndSetHeight();
 });
 
 
@@ -532,7 +683,31 @@ function typeWriter(title, bar, text, timeout) {
     type();
 }
 
+const rightContainer = document.querySelector('#page2 > div > section:first-of-type');
+
+function calculateAndSetHeight() {
+    console.log('Client width:', window.innerWidth);
+    if (window.innerWidth > 800) {
+        rightContainer.style.maxHeight = 1 + 'px';
+        rightContainer.offsetHeight;
+
+        const leftContainer1 = document.querySelector('#page2 > div > section:nth-of-type(2)');
+        const leftContainer2 = document.querySelector('#page2 > div > section:nth-of-type(3)');
+        
+        const totalHeight = leftContainer1.offsetHeight + leftContainer2.offsetHeight;
+        rightContainer.style.maxHeight = totalHeight + 20 + 'px';
+    }
+    else {
+        const rightContainer = document.querySelector('#page2 > div > section:first-of-type');
+        rightContainer.style.maxHeight = 'none';
+    }
+}
+
+
 // Start when page loads
 window.addEventListener('load', function() {
     typeWriter(title, bar, 'CHINA', 150);
+    calculateAndSetHeight();
 });
+
+

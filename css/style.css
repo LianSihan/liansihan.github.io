@@ -26,87 +26,97 @@ body>nav {
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 1000px;
-    padding: 100px 0px;
+    height: auto;
+    max-height: 73vw;
+    padding: 10vw 0px;
 }
 
-#page1 > section {
-    margin: 0 auto;
+#page1 > div {
+    display: flex;
+    flex-direction: row;
+}
+
+#page1 > div > section:nth-of-type(1) {
+    margin-left: 10vw;
     width: 100%;
-    max-width: 600px;
-    height: 100%;
-    max-height: 800px;
-    background: #f5f3e8;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('../images/newspaper_background.jpg');
+    max-width: 40vw;
+    height: 53vw;
+    background: url('../images/newspaper_background_3.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    border-radius: 6px;
+    border-radius: 6px 0px 0px 6px;
     overflow-y: auto;
     padding: 40px;
-    color: rgb(179, 255, 251);
+    color: rgb(73, 41, 26);
+    font-family: 'Georgia', serif;
 }
 
-#page1 > section::-webkit-scrollbar {
+#page1 > div > section:nth-of-type(2) {
+    width: 100%;
+    max-width: 40vw;
+    height: 53vw;
+    background: url('../images/newspaper_background_3_flipped.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    border-radius: 0px 6px 6px 0px;
+    overflow-y: auto;
+    padding: 40px;
+    color: rgb(73, 41, 26);
+    font-family: 'Georgia', serif;
+    direction: rtl; /* flips the scrollbar to the left */
+}
+
+#page1 > div > section:nth-of-type(1) > div {
+    display:none;
+}
+
+#page1 > div > section:nth-of-type(2) > div {
+    direction: ltr; /* flips the scrollbar to the left */
+}
+
+#page1 > div > section::-webkit-scrollbar {
     width: 12px;
 }
 
-#page1 > section::-webkit-scrollbar-track {
+#page1 > div > section::-webkit-scrollbar-track {
     background: #836d4b52;
-    border-radius: 6px;
 }
 
-#page1 > section::-webkit-scrollbar-thumb {
+#page1 > div > section::-webkit-scrollbar-thumb {
     background: #836d4b;
-    border-radius: 6px;
 }
 
-#page1 > section::-webkit-scrollbar-thumb:hover {
+#page1 > div > section::-webkit-scrollbar-thumb:hover {
     background: #5a4932;
 }
 
-
-
-#page1Content > p:nth-of-type(1) {
-    position: relative;
+#page1Content > h1 {
     text-align: center;
-    font-size: 1.1rem;
-    font-style: italic;
-    top: 70px;
+    font-size: 2.5rem;
+    margin-bottom: 35px;
 }
 
-#page1Content > p:nth-of-type(2) {
-    position: relative;
+#page1Content > p:first-of-type {
     text-align: center;
-    font-size: 1rem;
-    width: 250px;
-    top: 110px;
-    left: 60px;
-}
-
-#page1Content > p:nth-of-type(3) {
-    position: relative;
-    text-align: center;
-    font-size: 0.9rem;
-    width: 145px;
-    top: 135px;
-    left: 80px;
-}
-
-#page1Content > p:nth-of-type(4) {
-    position: relative;
-    text-align: center;
-    font-size: 1rem;
-    top: 200px;
-}
-
-#page1Content > p:last-of-type {
-    text-align: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    margin-bottom: 35px;
     font-style: italic;
 }
 
+#page1Content > div > p:last-of-type {
+    text-align: center;
+    font-size: 1.35rem;
+    font-style: italic;
+}
 
+#page1Content > p {
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
 
 #page1Content > h2 {
     text-align: center;
@@ -114,7 +124,13 @@ body>nav {
     margin: 55px 0px 20px 0px;
 }
 
-#page1Content > hr {
+#page1Content > div > h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 10px;
+}
+
+#page1Content > hr, #page1Content > div > hr {
     border: 0;
     height: 4px;
     background: #5a4932;
@@ -122,25 +138,44 @@ body>nav {
     margin: 20px 0px;
 }
 
-#page1Content > div {
+#page1Content > div, #page1Content > div > div {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto;
     gap: 20px;
 }
 
+#page1Content button {
+    border: 0;
+    background: transparent;
+    color: rgb(73, 41, 26);
+    font-family: 'Georgia', serif;
+}
+
 #page1Content aside {
-    background: rgb(240, 231, 216);
-    border: 2px solid rgb(184, 168, 143);
+    background: rgb(206,175,147);
+    border: 2px solid rgb(121, 103, 88);
     border-radius: 10px;
     padding: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
 }
 
 #page1Content aside:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px #00000020;
-    background: rgb(226, 214, 195);
+    background: rgb(180, 153, 129);
+}
+
+#page1Content aside p {
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+#page1Content aside h3 {
+    text-align: center;
+    font-size: 1.5rem;
 }
 
 #page1Content aside > div {
@@ -169,6 +204,16 @@ body>nav {
 
 
 
+
+
+
+
+
+
+
+
+
+
 #page2 {
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/gwoc.jpg');
     background-repeat: no-repeat;
@@ -189,6 +234,26 @@ body>nav {
     background: #f5f3e8;
     border-radius: 5px;
     padding: 20px;
+    overflow-y: auto;
+    max-height: 70vh;
+}
+
+#page2 > div > section::-webkit-scrollbar {
+    width: 12px;
+}
+
+#page2 > div > section::-webkit-scrollbar-track {
+    background: #836d4b52;
+    border-radius: 4px;
+}
+
+#page2 > div > section::-webkit-scrollbar-thumb {
+    background: #836d4b;
+    border-radius: 4px;
+}
+
+#page2 > div > section::-webkit-scrollbar-thumb:hover {
+    background: #5a4932;
 }
 
 #page2 > div > section:nth-of-type(2) {
@@ -196,6 +261,10 @@ body>nav {
     background: #f5f3e8;
     border-radius: 5px;
     padding: 20px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 20px;
 }
 
 #page2 > div > section:nth-of-type(3) {
@@ -203,11 +272,210 @@ body>nav {
     background: #f5f3e8;
     border-radius: 5px;
     padding: 20px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 20px;
 }
 
-#page3 {
-    background: rgb(159, 255, 159);
+#page2 > div > section:nth-of-type(2) > h3,
+#page2 > div > section:nth-of-type(3) > h3 {
+    grid-column: 1 / 3;
+    text-align: center;
+    font-size: 1.5rem;
 }
+
+#page2 > div > section:nth-of-type(2) > img,
+#page2 > div > section:nth-of-type(3) > img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    align-self: center;
+    justify-self: center;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.377);
+    transition: all 0.3s ease;
+}
+
+#page2 > div > section:nth-of-type(2) > img:hover,
+#page2 > div > section:nth-of-type(3) > img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.753);
+}
+
+#page2 > div > section:nth-of-type(2) > p:first-of-type,
+#page2 > div > section:nth-of-type(3) > p:first-of-type {
+    align-self: center;
+    text-align: justify;
+}
+
+#page2 > div > section:nth-of-type(2) > p:last-of-type,
+#page2 > div > section:nth-of-type(3) > p:last-of-type {
+    grid-column: 1 / 3;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#page3 {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/gwoc.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 40px;
+}
+
+#page3 > div {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    grid-gap: 20px;
+}
+
+#inventions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-gap: 20px;
+    padding: 20px;
+    background: #f5f3e8;
+    border-radius: 10px;
+}
+
+#quizButton,
+#quiz {
+    padding: 20px;
+    background: #f5f3e8;
+    border-radius: 10px;
+}
+
+#inventions > h2,
+#page3 > div > div > button {
+    display: flex;
+    grid-column: 1 / 3;
+    text-align: center;
+    justify-self: center;
+    align-self: center;
+}
+
+#page3 > div > div > button,
+#quiz button {    
+    background: #5a4932;
+    color: #c5a371;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 2px solid #836d4b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#page3 > div > div > button:hover,
+#quiz button:hover {
+    background: #c5a371;
+    color: #5a4932;
+    border: 2px solid #5a4932;
+    transform: scale(1.1);
+}
+
+#quiz button {
+    margin: 0px 8px;
+}
+
+#quiz {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto;
+    grid-gap: 20px;
+}
+
+#quiz > div {
+    justify-self: center;
+    align-self: center;
+}
+
+#quiz > div p {
+    justify-self: center;
+    align-self: center;
+    padding-bottom: 10px;
+}
+
+#option {
+    padding: 10px;
+    border: 2px solid rgb(184, 168, 143);
+    border-radius: 10px;
+    background: #f5f3e8;
+    color: black;
+    width: 300px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+#checkboxes {
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto;
+    grid-gap: 5px;
+    justify-self: center;
+    align-self: center;
+}
+
+#radios {
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 5px;
+    justify-self: center;
+    align-self: center;
+}
+
+#radios label,
+#checkboxes label {
+    cursor: pointer;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked + #option,
+input[type="radio"]:checked + #option {
+    padding: 10px;
+    border: 2px solid rgb(184, 168, 143);
+    border-radius: 10px;
+    background: rgb(219, 212, 198);
+    color: black;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    padding: 10px;
+    border: 2px solid rgb(184, 168, 143);
+    border-radius: 10px;
+    background: #f5f3e8;
+    color: black;
+    width: 300px;
+    text-align: center;
+    transition: all 0.3s ease;
+    justify-self: center;
+    align-self: center;
+}
+
+
+
+
+
 
 #page4 {
     background: rgb(152, 152, 255);
@@ -239,6 +507,7 @@ body>nav {
     height: auto;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
+    border-radius: 7.5px;
 }
 
 #page4 > section > article {
@@ -252,7 +521,15 @@ body>nav {
     margin: 0 15%;
     grid-column: 1 / 3;
     text-align: center;
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
 }
+
+
+
+
+
 
 #page5 {
     background: rgb(163, 255, 232);
@@ -287,6 +564,7 @@ body header {
     align-items: center;
     padding: 0.1rem 1rem;
     height: 5vh;
+    width: auto;
 }
 
 body header button {
@@ -492,8 +770,6 @@ body > section > aside > p {
     height: 100%;
     cursor: pointer;
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
 }
 
 #ballContainer > div:first-of-type button:hover {
@@ -501,21 +777,6 @@ body > section > aside > p {
     color: #5a4932;
     border: 2px solid #5a4932;
     transform: scale(1.1);
-}
-
-#ballContainer > div:first-of-type button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, #00000000, #836d4b, #00000000);
-    transition: left 0.5s ease;
-}
-
-#ballContainer > div:first-of-type button:hover::before {
-    left: 100%;
 }
 
 #ballLine {
@@ -528,6 +789,11 @@ body > section > aside > p {
     z-index: 0;
 }
 
+#page4 .description {
+    margin-top: 10px;
+    display: block;
+}
+
 #ballContent {
     height: auto;
     margin: 0 25px;
@@ -535,7 +801,6 @@ body > section > aside > p {
     padding: 20px;
     background: #f5f3e8;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto auto;
@@ -575,6 +840,7 @@ body > section > aside > p {
 #ballContent img {
     width: 100%;
     height: auto;
+    border-radius: 7.5px;
 }
 
 .timeline {
@@ -724,30 +990,29 @@ body > section > aside > p {
 
 
 
-#page3 > div {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
-}
-
-#page3 > div > p {
-    grid-column: 1 / 3;
-    text-align: center;
-}
 
 .invention {
     position: relative;
-    width: 45vw;
+    width: auto;
+    height: auto;
     justify-self: center;
-    margin: 10px 0px;
 }
 
 .inventiondetail {
-    border-radius: 10px;
-    background: #fdfdfd;
-    border: 1px solid #ccc;
+    border-radius: 7.5px;
+    border: 2px solid rgb(184, 168, 143);
     padding: 20px;
-    box-sizing: border-box;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 10px;
+}
+
+.inventiondetail img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
 }
 
 .blockingtile {
@@ -757,9 +1022,9 @@ body > section > aside > p {
     width: 100%;
     height: 100%;
     background: white;
-    border-radius: 10px;
-    border: 2px solid #aaa;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background: rgb(240, 231, 216);
+    border-radius: 7.5px;
+    border: 2px solid rgb(184, 168, 143);
     z-index: 2;
     cursor: pointer;
     transition: transform 0.4s ease, opacity 0.3s ease;
@@ -773,10 +1038,149 @@ body > section > aside > p {
 }
 
 
+#quiz.gone,
+#inventions.gone {
+    display: none;
+}
 
 
 
-@media screen and (max-width:800px) {}
+@media screen and (max-width: 800px) {
+    #page1 {
+        max-height: 127vw;
+    }
+
+    #page1 > div > section:nth-of-type(2) {
+        display: none;
+    }
+
+    #page1 > div > section:nth-of-type(1) {
+        border-radius: 6px;
+        width: 100%;
+        max-width: 80vw;
+        height: 100%;
+        max-height: 107vw;
+        margin: 0 auto;
+    }
+
+    #page1 > div > section:nth-of-type(1) > div {
+        margin-top: 50px;
+        display: block;
+    }
+
+    #page1 > div > section::-webkit-scrollbar-track {
+        background: #836d4b52;
+        border-radius: 6px;
+    }
+
+    #page1 > div > section::-webkit-scrollbar-thumb {
+        background: #836d4b;
+        border-radius: 6px;
+    }
+
+
+
+
+    #page2 > div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    #page2 > div > section:first-of-type {
+        grid-row: 3 / 4;
+        grid-column: 1 / 3;
+        margin: 0px 20px 20px 20px;
+    }
+
+    #page2 > div > section:nth-of-type(2),
+    #page2 > div > section:nth-of-type(3) {
+        grid-template-rows: auto auto auto auto;
+        grid-column: 1 / 3;
+    }
+    
+    #page2 > div > section:nth-of-type(2) > img {
+        grid-row: 3/4;
+        grid-column: 1 / 3;
+    }
+
+    #page2 > div > section:nth-of-type(3) > img {
+        grid-column: 1 / 3;
+    }
+
+    #page2 > div > section:nth-of-type(2) > p:first-of-type,
+    #page2 > div > section:nth-of-type(3) > p:first-of-type {
+        grid-column: 1 / 3;
+    }
+
+    #page2 > div > section:nth-of-type(2) > p:last-of-type,
+    #page2 > div > section:nth-of-type(3) > p:last-of-type {
+        text-align: justify;
+    }
+
+
+
+
+
+
+    #page3 {
+        padding: 20px;
+    }
+
+    #page3 > div > div {
+        grid-template-rows: auto auto auto auto auto auto;
+    }
+
+    .invention {
+        grid-column: 1/3;
+    }
+
+
+
+
+
+    #page4 > section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+
+    #page4 > section > aside {
+        grid-column: 1 / 3;
+    }
+
+    #page4 > section > article {
+        grid-column: 1 / 3;
+        text-align: center;
+    }
+
+    #page4 .description {
+        display: none;
+    }
+
+    #ballContent {
+        height: auto;
+        margin: 0 25px;
+        margin-top: 20px;
+        padding: 20px;
+        background: #f5f3e8;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto auto;
+        grid-gap: 10px;
+    }
+
+    #ballContent article {
+        grid-column: 1 / 3;
+    }
+
+    #ballContent aside {
+        grid-column: 1 / 3;
+    }
+}
 
 /*to unhide menu items*/
 /* .menuShow{display:block;} */
