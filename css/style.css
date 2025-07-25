@@ -16,9 +16,65 @@
     height: auto;
 }
 
-body>nav {
+body >nav {
     display: none;
 }
+
+body {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    max-width: 100%;
+}
+
+body header,
+body footer {
+    font-family: 'Courier New', Courier, monospace;
+    /* Using Courier New for the header and footer */
+    background: black;
+    color: white;
+    /* Makes text colour white as background is black */
+    display: flex;
+    justify-content: space-between;
+    /* Makes it so that the header and footer items are spaced evenly */
+}
+
+body header {
+    font-family: 'Courier New', Courier, monospace;
+    background: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.1rem 1rem;
+    height: 5vh;
+    width: auto;
+}
+
+body header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 100%;
+}
+
+body header button img {
+    height: 100%;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+body header button.animation {
+    animation: rotate 2s ease-in-out;
+}
+
+body header button img:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+
 
 #page1 {
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/gwoc.jpg');
@@ -92,45 +148,45 @@ body>nav {
     background: #5a4932;
 }
 
-#page1Content > h1 {
+.page1Content > h1 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 35px;
 }
 
-#page1Content > p:first-of-type {
+.page1Content > p:first-of-type {
     text-align: center;
     font-size: 1.5rem;
     margin-bottom: 35px;
     font-style: italic;
 }
 
-#page1Content > div > p:last-of-type {
+.page1Content > div > p:last-of-type {
     text-align: center;
     font-size: 1.35rem;
     font-style: italic;
 }
 
-#page1Content > p {
+.page1Content > p {
     text-align: justify;
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 20px;
 }
 
-#page1Content > h2 {
+.page1Content > h2 {
     text-align: center;
     font-size: 2rem;
     margin: 55px 0px 20px 0px;
 }
 
-#page1Content > div > h2 {
+.page1Content > div > h2 {
     text-align: center;
     font-size: 2rem;
     margin-top: 10px;
 }
 
-#page1Content > hr, #page1Content > div > hr {
+.page1Content > hr, .page1Content > div > hr {
     border: 0;
     height: 4px;
     background: #5a4932;
@@ -138,21 +194,21 @@ body>nav {
     margin: 20px 0px;
 }
 
-#page1Content > div, #page1Content > div > div {
+.page1Content > div, .page1Content > div > div {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto;
+    grid-template-rows: auto auto auto auto auto;
     gap: 20px;
 }
 
-#page1Content button {
+.page1Content button {
     border: 0;
     background: transparent;
     color: rgb(73, 41, 26);
     font-family: 'Georgia', serif;
 }
 
-#page1Content aside {
+.page1Content aside {
     background: rgb(206,175,147);
     border: 2px solid rgb(121, 103, 88);
     border-radius: 10px;
@@ -161,24 +217,24 @@ body>nav {
     text-align: left;
 }
 
-#page1Content aside:hover {
+.page1Content aside:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px #00000020;
     background: rgb(180, 153, 129);
 }
 
-#page1Content aside p {
+.page1Content aside p {
     text-align: justify;
     font-size: 1rem;
     line-height: 1.6;
 }
 
-#page1Content aside h3 {
+.page1Content aside h3 {
     text-align: center;
     font-size: 1.5rem;
 }
 
-#page1Content aside > div {
+.page1Content aside > div {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -225,17 +281,19 @@ body>nav {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
+    grid-gap: 20px;
+    padding: 20px;
 }
 
 #page2 > div > section:first-of-type {
     grid-row: 1 / 3;
     grid-column: 2 / 3;
-    margin: 20px 20px 20px 10px;
     background: #f5f3e8;
     border-radius: 5px;
     padding: 20px;
     overflow-y: auto;
     max-height: 70vh;
+    width: 100%;
 }
 
 #page2 > div > section::-webkit-scrollbar {
@@ -257,7 +315,6 @@ body>nav {
 }
 
 #page2 > div > section:nth-of-type(2) {
-    margin: 20px 10px 10px 20px;
     background: #f5f3e8;
     border-radius: 5px;
     padding: 20px;
@@ -268,7 +325,6 @@ body>nav {
 }
 
 #page2 > div > section:nth-of-type(3) {
-    margin: 10px 10px 20px 20px;
     background: #f5f3e8;
     border-radius: 5px;
     padding: 20px;
@@ -535,58 +591,267 @@ select {
     background: rgb(163, 255, 232);
 }
 
-
-
-body {
+#page5 > div {
     display: grid;
-    grid-template-columns: auto;
+    grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto;
-    max-width: 100%;
-}
-
-body header,
-body footer {
-    font-family: 'Courier New', Courier, monospace;
-    /* Using Courier New for the header and footer */
-    background: black;
+    grid-gap: 20px;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/silk camel.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: auto;
+    padding: 20px;
     color: white;
-    /* Makes text colour white as background is black */
-    display: flex;
-    justify-content: space-between;
-    /* Makes it so that the header and footer items are spaced evenly */
 }
 
-body header {
-    font-family: 'Courier New', Courier, monospace;
-    background: black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.1rem 1rem;
-    height: 5vh;
-    width: auto;
+#flip {
+    width: 100%;
+    height: 250px;
+    perspective: 1000px;
 }
 
-body header button {
-    background: none;
-    border: none;
+#flipInner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    text-align: center;
     cursor: pointer;
+}
+
+#flip.flipped #flipInner {
+    transform: rotateY(180deg);
+}
+
+#flipFront,
+#flipBack {
+    position: absolute;
+    width: 100%;
     height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    border: 2px solid #8b7355;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-body header button img {
-    height: 100%;
-    width: auto;
-    transition: transform 0.3s ease;
+#flipFront {
+    background: #f5f3e8;
+    color: black;
+    font-weight: 600;
+    font-size: 1.2rem;
 }
 
-body header button.animation {
-    animation: rotate 2s ease-in-out;
+#flipBack { 
+    transform: rotateY(180deg);
+    color: white;
 }
 
-body header button img:hover {
-    transform: scale(1.1);
+#flip:nth-of-type(1) #flipBack {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/China.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;   
 }
+
+#flip:nth-of-type(2) #flipBack {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/China.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;   
+}
+
+#flip:nth-of-type(3) #flipBack {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/China.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;   
+}
+
+#flip:nth-of-type(4) #flipBack {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/China.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;   
+}
+
+#flip:nth-of-type(5) #flipBack {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/China.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;   
+}
+
+#flip:nth-of-type(6) #flipBack {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/China.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;   
+}
+
+
+
+
+#page6 {
+    background: rgb(252, 162, 162);
+}
+
+#page6 > div {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-gap: 10px;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/silk camel.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    color: white;
+}
+
+#page6 > div > div {
+    padding: 10px;
+    border: 2px solid rgb(184, 168, 143);
+    border-radius: 10px;
+    background: #f5f3e8;
+    width: 100%;
+    height: auto;
+    color: black;
+    text-align: center;
+    transition: all 0.3s ease;
+    justify-self: center;
+    align-self: center;
+}
+
+#page6 > div > div:first-of-type > h2 {
+    margin-bottom: 10px;
+}
+
+#mainArea {
+    padding: 82px 0px;
+}
+
+#gameOverText {
+    margin-bottom: 10px;
+}
+
+#shop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 10px;
+}
+
+#shop > div {
+    padding: 10px;
+    border: 2px solid rgb(184, 168, 143);
+    border-radius: 7.5px;
+    background: #f5f3e8;
+    width: 100%;
+    height: auto;
+    color: black;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+#backBtn {
+    grid-column: 1 / 3;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+#inventoryItems {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+#inventoryItems > div {
+    padding: 10px;
+    border: 2px solid rgb(184, 168, 143);
+    border-radius: 7.5px;
+    background: #f5f3e8;
+    width: 100%;
+    height: auto;
+    color: black;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+#page6 button {
+    background: #5a4932;
+    color: #c5a371;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 2px solid #836d4b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#page6 button:hover {
+    background: #c5a371;
+    color: #5a4932;
+    border: 2px solid #5a4932;
+}
+
+#place {
+    margin-bottom: 10px;
+}
+
+#banditArea {
+    position: relative;
+    margin-top: 10px;
+    width: 100%;
+    height: 50vh;
+    border: 2px solid rgb(184, 168, 143);
+    border-radius: 5px;
+}
+
+.enemy {
+    position: absolute;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.enemy.animation {
+    animation: spin 1s infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @keyframes rotate {
     0% {
@@ -1039,13 +1304,22 @@ body > section > aside > p {
 
 
 #quiz.gone,
-#inventions.gone {
+#inventions.gone,
+#shop.gone,
+#mainArea.gone,
+#enemyArea.gone,
+#gameOver.gone,
+#startArea.gone {
     display: none;
 }
 
 
 
 @media screen and (max-width: 800px) {
+    body > section > aside > p {
+        font-size: 3rem;
+    }
+
     #page1 {
         max-height: 127vw;
     }
@@ -1090,7 +1364,6 @@ body > section > aside > p {
     #page2 > div > section:first-of-type {
         grid-row: 3 / 4;
         grid-column: 1 / 3;
-        margin: 0px 20px 20px 20px;
     }
 
     #page2 > div > section:nth-of-type(2),
@@ -1179,6 +1452,33 @@ body > section > aside > p {
 
     #ballContent aside {
         grid-column: 1 / 3;
+    }
+
+    #ballContainer > div:first-of-type {
+        padding: 0;
+    }
+
+
+
+
+
+
+    #page5 > div {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto auto auto;
+    }
+
+
+    #shop {
+        grid-template-rows: auto auto auto auto auto;
+    }
+
+    #shop > div {
+        grid-column: 1 / 3;
+    }
+
+    #inventoryItems {
+        grid-template-columns: 1fr;
     }
 }
 

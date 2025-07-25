@@ -4,7 +4,10 @@ const page2btn = document.querySelector("#page2btn");
 const page3btn = document.querySelector("#page3btn");
 const page4btn = document.querySelector("#page4btn");
 const page5btn = document.querySelector("#page5btn");
+const page6btn = document.querySelector("#page6btn");
 const homebtn = document.querySelector("#home");
+
+const page1Content = document.querySelectorAll(".page1Content");
 
 const title = document.getElementById('title');
 const bar = document.getElementById('cursor');
@@ -68,8 +71,31 @@ page5btn.addEventListener("click", function () {
     navMenu.classList.remove("menuShow");
     typeWriter(title, bar, 'Ancient Chinese Culture', 100);
 });
+page6btn.addEventListener("click", function () {
+    show(6);
+    navMenu.classList.remove("menuShow");
+    typeWriter(title, bar, 'Game', 100);
+});
+page1Content.forEach(content => {
+    content.querySelector("button:nth-of-type(1)").addEventListener("click", () => {
+        show(2);
+    });
+    content.querySelector("button:nth-of-type(2)").addEventListener("click", () => {
+        show(3);
+    });
+    content.querySelector("button:nth-of-type(3)").addEventListener("click", () => {
+        show(4);
+    });
+    content.querySelector("button:nth-of-type(4)").addEventListener("click", () => {
+        show(5);
+    });
+    content.querySelector("button:nth-of-type(5)").addEventListener("click", () => {
+        show(6);
+    });
+});
+
 hideall();
-show(3);
+show(1);
 
 const hamBtn = document.getElementById("hamIcon"); // the button
 const navMenu = document.getElementById("sideMenu"); // the menu to show/hide
@@ -84,7 +110,13 @@ closeBtn.addEventListener("click", () => {
     navMenu.classList.remove("menuShow");
 });
 
-
+const flipCards = document.querySelectorAll('#flip');
+            
+flipCards.forEach(card => {
+    card.addEventListener('click', function() {
+        this.classList.toggle('flipped');
+    });
+});
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -394,10 +426,300 @@ reset.addEventListener("click", () => {
 
 
 
+const locations = ['China', 'India', 'Uzbekistan', 'Persia', 'Turkey', 'Italy'];
+const items = {
+    'China': [
+        {name: '🧵 Silk 🧵', price: 20, doublePrice: true},
+        {name: '🍵 Tea 🍵', price: 15, doublePrice: false},
+        {name: '🏺 Porcelain 🏺', price: 25, doublePrice: true},
+        {name: '💎 Jade 💎', price: 18, doublePrice: false}
+    ],
+    'India': [
+        {name: '🌶️ Spices 🌶️', price: 18, doublePrice: true},
+        {name: '💎 Gems 💎', price: 30, doublePrice: true},
+        {name: '🧵 Cotton 🧵', price: 12, doublePrice: false},
+        {name: '🕯️ Incense 🕯️', price: 16, doublePrice: false}
+    ],
+    'Uzbekistan': [
+        {name: '🧶 Carpets 🧶', price: 35, doublePrice: true},
+        {name: '🍈 Melons 🍈', price: 8, doublePrice: false},
+        {name: '🐎 Horses 🐎', price: 50, doublePrice: false},
+        {name: '🪙 Gold Coins 🪙', price: 22, doublePrice: true}
+    ],
+    'Persia': [
+        {name: '🌸 Perfume 🌸', price: 22, doublePrice: true},
+        {name: '🌺 Saffron 🌺', price: 40, doublePrice: true},
+        {name: '🥜 Pistachios 🥜', price: 14, doublePrice: false},
+        {name: '🥈 Silver 🥈', price: 28, doublePrice: false}
+    ],
+    'Turkey': [
+        {name: '👞 Leather 👞', price: 16, doublePrice: false},
+        {name: '🍯 Honey 🍯', price: 10, doublePrice: false},
+        {name: '🏺 Ceramics 🏺', price: 28, doublePrice: true},
+        {name: '🫒 Olives 🫒', price: 12, doublePrice: false}
+    ]
+};
 
 
 
+let player = 0;
+let gold = 100;
+let combat = false;
+let inventory = {};
+let enemyCount = 0;
+let combatTimer = 0;
+let timer = null;
 
+
+const travelBtn = document.querySelector("#travelBtn");
+const buyBtn = document.querySelector("#buyBtn");
+const backBtn = document.querySelector("#backBtn");
+const startBtn = document.querySelector("#startBtn");
+const restartBtn = document.querySelector("#restartBtn");
+
+const mainArea = document.querySelector("#mainArea");
+const shopArea = document.querySelector("#shop");
+const enemyArea = document.querySelector("#enemyArea");
+const gameOverArea = document.querySelector("#gameOver");
+const startArea = document.querySelector("#startArea");
+const banditArea = document.querySelector("#banditArea");
+
+const where = document.querySelector("#location");
+const goldAmt = document.querySelector("#gold");
+const progress = document.querySelector("#progress");
+const time = document.querySelector("#timer");
+const place = document.querySelector("#place");
+
+const endMessage = document.querySelector("#gameOverText");
+
+travelBtn.addEventListener("click", travel);
+buyBtn.addEventListener("click", function() {
+    shopArea.classList.remove("gone");
+    mainArea.classList.add("gone");
+    updateShop();
+});
+backBtn.addEventListener("click", function() {
+    mainArea.classList.remove("gone");
+    shopArea.classList.add("gone");
+});
+startBtn.addEventListener("click", function() {
+    resetGame();
+    updateStats();
+    mainArea.classList.remove("gone");
+    startArea.classList.add("gone");
+});
+restartBtn.addEventListener("click", function() {
+    resetGame();
+});
+
+function travel() {
+    if (combat) {
+        return;
+    }
+
+    if (Math.random() < 0.5) {
+        startCombat();
+    } else {
+        moveNext();
+    }
+}
+
+function updateStats() {
+    where.innerHTML = `<p>Location: ${locations[player]}</p>`;
+    goldAmt.innerHTML = `<p>Gold: ${gold}</p>`;
+    progress.innerHTML = `<p>Progress: ${player + 1}/6</p>`;
+}
+
+function updateShop() {
+    const shopItems = items[locations[player]];
+    shopItems.forEach((item, index) => {
+        const product = document.getElementById(`item${index + 1}`);
+        const name = product.querySelector("p:nth-child(1)");
+        const cost = product.querySelector("p:nth-child(2)");
+        const itemBtn = product.querySelector("button");
+
+        name.textContent = item.name;
+        cost.textContent = `Price: ${item.price} Gold`;
+
+        itemBtn.onclick = () => {
+            buyItem(item.name, item.price);
+        };
+    });
+}
+
+function buyItem(name, price) {
+    if (gold >= price) {
+        gold -= price;
+
+        if (inventory[name]) {
+            inventory[name]++;
+        } else {
+            inventory[name] = 1;
+        }
+
+        updateStats();
+        updateInventory();
+    } else {
+        alert('Not enough gold!');
+    }
+}
+
+function updateInventory() {
+    const inv = document.getElementById('inventoryItems');
+    inv.innerHTML = '';
+
+    empty = true;
+
+    for (let item in inventory) {
+        empty = false;
+        const amount = inventory[item];
+        const div = document.createElement('div');
+        div.textContent = item + ": " + amount;
+        inv.appendChild(div);
+    }
+
+    if (empty) {
+        const div = document.createElement('div');
+        div.textContent = "Empty";
+        inv.appendChild(div);
+    }
+}
+
+function startCombat() {
+    combat = true;
+    mainArea.classList.add("gone");
+    enemyArea.classList.remove("gone");
+    enemyCount = 3;
+    combatTimer = 10;
+
+    for (let i = 0; i < 3; i++) {
+        spawnEnemy();
+    }
+
+    timer = setInterval(() => {
+        combatTimer--;
+        time.textContent = combatTimer;
+
+        if (combatTimer <= 0) {
+            endMessage.innerHTML = `
+                <p>Game Over! You were robbed by the bandits.</p>
+            `;
+            enemyArea.classList.add("gone");
+            gameOverArea.classList.remove("gone");
+            clearInterval(timer);
+        }
+    }, 1000);
+}
+
+function spawnEnemy() {
+    const enemy = document.createElement("img");
+    enemy.classList.add("enemy");
+    enemy.src = "images/china.png";
+    enemy.alt = "Bandit";
+    enemy.style.left = 20 + Math.random() * (banditArea.offsetWidth - 80) + 'px';
+    enemy.style.top =  20 + Math.random() * (banditArea.offsetHeight - 80) + 'px';
+
+    const interval = setInterval(() => {
+        enemy.style.left = 20 + Math.random() * (banditArea.offsetWidth - 80) + 'px';
+        enemy.style.top =  20 + Math.random() * (banditArea.offsetHeight - 80) + 'px';
+        if (combatTimer <= 0) {
+            enemy.remove();
+        }
+    }, 2000);
+
+    enemy.onclick = function() {
+        if (enemy.style.opacity === "0") {
+            return; 
+        }
+
+        enemy.classList.add("animation");
+        enemy.style.opacity = "0";
+        enemyCount--;
+
+        clearInterval(interval);
+        
+        if (enemyCount <= 0) {
+            clearInterval(timer);
+            setTimeout(moveNext, 500);
+            combat = false;
+            combatTimer = 0;
+        }
+    };
+
+    banditArea.appendChild(enemy);
+}
+
+function moveNext() {
+    player++;
+
+    if (player >= locations.length - 1) {
+        endGame();
+    } else {
+        place.textContent = `You are now in ${locations[player]}`;
+        updateStats();
+        enemyArea.classList.add("gone");
+        mainArea.classList.remove("gone");
+    }
+}
+
+function endGame() {
+    updateStats();
+
+    let total = 0;
+
+    for (let thing in inventory) {
+        if (inventory.hasOwnProperty(thing)) {
+            let found = false;
+
+            for (let region in items) {
+                for (let i = 0; i < 4; i++) {
+                    let thingy = items[region][i];
+
+                    if (thingy.name === thing) {
+                        if (thingy.doublePrice) {
+                            total += thingy.price * inventory[thing] * 2;
+                        } 
+                        else {
+                            total += thingy.price * inventory[thing];
+                        }
+                        found = true;
+                        break;
+                    }
+                }
+                if (found) break;
+            }
+        }
+    }
+
+    endMessage.innerHTML = `
+        <p>Congratulations! You have reached Italy and sold everything!</p>
+        <p>You have profitted ${total + gold - 100} Gold</p>
+    `;
+    enemyArea.classList.add("gone");
+    mainArea.classList.add("gone");
+    gameOverArea.classList.remove("gone");
+}
+
+function resetGame() {
+    player = 0;
+    gold = 100;
+    inventory = {};
+    combat = false;
+    enemyCount = 0;
+    combatTimer = 0;
+    timer = null;
+
+
+    mainArea.classList.add("gone");
+    shopArea.classList.add("gone");
+    enemyArea.classList.add("gone");
+    gameOverArea.classList.add("gone");
+    startArea.classList.remove("gone");
+    where.innerHTML = `<p>Start First</p>`;
+    goldAmt.innerHTML = ``;
+    progress.innerHTML = ``;
+    updateInventory();
+}
 
 
 
@@ -474,90 +796,90 @@ document.addEventListener('keydown', (e) => {
 });
 
 const regionInfo = {
-  "China": {
-    title: "China - The Birthplace of Silk and Innovation",
-    description: "China was the eastern origin of the Silk Road and the world's sole producer of silk for centuries. The trade routes began in Chang'an (now Xi'an), capital of multiple Chinese dynasties.",
-    exports: "Silk, porcelain, tea, paper, gunpowder, compass",
-    exportsHeader: "Key Exports",
-    exportsDescription: "China's monopoly on silk production made it the most coveted luxury item worldwide, while their revolutionary inventions like gunpowder, paper, and the compass fundamentally changed how people lived, communicated, and navigated across continents.",
-    culture: "Buddhism spread, inventions, Confucian ideas",
-    cultureHeader: "Cultural Contributions",
-    cultureDescription: "Chinese technological innovations revolutionized warfare, navigation, and knowledge preservation globally, while Buddhist and Confucian philosophies provided new frameworks for governance, ethics, and spiritual understanding that shaped entire civilizations from Korea to Central Asia.",
-    img: "images/china emoji.png",
-    exportsImage: "images/China.png",
-    cultureImage: "images/China.png",
-    emoji: { filter: "drop-shadow(0 0 10px rgba(255, 0, 0, 0.8))" }
-  },
-  "India": {
-    title: "India - The Spiritual and Spicy Connector",
-    description: "India was a cultural and trade crossroads of East and West. It participated in both land and maritime Silk Road routes.",
-    exports: "Spices, textiles, gemstones, ivory, cotton, indigo dye",
-    exportsHeader: "Key Exports",
-    exportsDescription: "India's aromatic spices like black pepper, cinnamon, and cardamom were literally worth their weight in gold, driving European exploration for centuries, while precious gemstones, fine cotton textiles, and indigo dye became status symbols across the ancient world.",
-    culture: "Hinduism, Buddhism, mathematics, medicine, art, astronomy",
-    cultureHeader: "Cultural Contributions",
-    cultureDescription: "Indian mathematical concepts including the decimal system and zero revolutionized global mathematics, while Ayurvedic medicine and surgical techniques advanced healthcare, and Hindu-Buddhist art styles influenced temple architecture from Southeast Asia to Central Asia.",
-    img: "images/india emoji.png",
-    exportsImage: "images/China.png",
-    cultureImage: "images/China.png",
-    emoji: { filter: "drop-shadow(0 0 10px rgba(255, 186, 108, 0.8))" }
-  },
-  "Uzbekistan": {
-    title: "Uzbekistan - Oasis Cities of Central Asia",
-    description: "Uzbekistan's cities like Samarkand and Bukhara were caravan hubs where traders from China, India, Persia converged.",
-    exports: "Horses, metalwork, leather goods, dried fruits",
-    exportsHeader: "Key Exports",
-    exportsDescription: "Central Asian horses were crucial for military campaigns and long-distance travel, while expert metalworkers produced weapons and tools that were traded across continents, and dried fruits provided essential nutrition for grueling caravan journeys through harsh desert terrain.",
-    culture: "Islamic learning, arts, Persian-Chinese cultural exchange, trade facilitation",
-    cultureHeader: "Cultural Role",
-    cultureDescription: "The great cities of Samarkand and Bukhara became prestigious centers of Islamic scholarship where Persian poetry merged with Chinese philosophy, creating unique architectural styles and fostering the translation movement that preserved and transmitted ancient Greek and Indian knowledge to the world.",
-    img: "images/uzbekistan emoji.png",
-    exportsImage: "images/China.png",
-    cultureImage: "images/China.png",
-    emoji: { filter: "drop-shadow(0 0 10px rgba(0, 255, 255, 1))" }
-  },
-  "Persia": {
-    title: "Persia - The Imperial Bridge Between Worlds",
-    description: "Persia controlled many crucial Silk Road sections, linking East and West through its vast empire.",
-    exports: "Persian rugs, wine, pearls, perfume oils, metalwork, glass",
-    exportsHeader: "Key Exports",
-    exportsDescription: "Persian carpets became symbols of wealth and sophistication in palaces from China to Europe, while their fine wines, lustrous pearls from the Persian Gulf, and exquisite perfume oils set the standards for luxury goods that influenced court culture across three continents.",
-    culture: "Literature, infrastructure development, Zoroastrianism, Persian art and poetry",
-    cultureHeader: "Cultural Contributions",
-    cultureDescription: "Persian engineers built the world's most advanced road systems and caravanserais that enabled safe long-distance trade, while Persian literature and poetry became the lingua franca of educated elites from Turkey to India, and Zoroastrian concepts of good versus evil influenced major world religions.",
-    img: "images/persia emoji.png",
-    exportsImage: "images/China.png",
-    cultureImage: "images/China.png",
-    emoji: { filter: "drop-shadow(0 0 10px rgba(72, 255, 0, 1))" }
-  },
-  "Turkey": {
-    title: "Turkey - The Continental Gateway",
-    description: "Turkey was home to Constantinople, the crucial link between Asia and Europe, controlling access to European markets.",
-    exports: "Processed goods, wine, olive oil, Byzantine crafts",
-    exportsHeader: "Key Exports",
-    exportsDescription: "Constantinople's strategic position allowed it to control and tax all goods flowing between Asia and Europe, while Byzantine artisans refined Eastern silk and spices into luxury products that commanded premium prices in European markets.",
-    culture: "Byzantine heritage, blend of Christian and Islamic cultures, architectural innovations",
-    cultureHeader: "Cultural Contributions",
-    cultureDescription: "As the last remnant of the Roman Empire, Byzantium preserved classical Greek and Roman knowledge while absorbing Islamic innovations, creating magnificent architectural wonders like the Hagia Sophia that influenced both Eastern Orthodox and Islamic building traditions for centuries.",
-    img: "images/turkey emoji.png",
-    exportsImage: "images/China.png",
-    cultureImage: "images/China.png",
-    emoji: { filter: "drop-shadow(0 0 10px rgba(255, 0, 0, 0.8))" }
-  },
-  "Italy": {
-    title: "Italy - The European Endpoint",
-    description: "Italy's merchant republics like Venice and Genoa were the main European recipients and distributors of Eastern goods.",
-    exports: "European manufactured goods, wine, olive oil, glass (Venetian)",
-    exportsHeader: "Key Exports to East",
-    exportsDescription: "Italy traded European products eastward while importing Asian luxuries.",
-    culture: "Renaissance funding through trade wealth, maritime exploration, luxury culture development",
-    cultureHeader: "Cultural Impact",
-    cultureDescription: "Silk Road wealth fueled the Renaissance and European exploration age.",
-    img: "images/italy emoji.png",
-    exportsImage: "images/China.png",
-    cultureImage: "images/China.png",
-    emoji: { filter: "drop-shadow(0 0 10px rgba(21, 255, 0, 1))" }
-  }
+    "China": {
+        title: "China - The Birthplace of Silk and Innovation",
+        description: "China was the eastern origin of the Silk Road and the world's sole producer of silk for centuries. The trade routes began in Chang'an (now Xi'an), capital of multiple Chinese dynasties.",
+        exports: "Silk, porcelain, tea, paper, gunpowder, compass",
+        exportsHeader: "Key Exports",
+        exportsDescription: "China's monopoly on silk production made it the most coveted luxury item worldwide, while their revolutionary inventions like gunpowder, paper, and the compass fundamentally changed how people lived, communicated, and navigated across continents.",
+        culture: "Buddhism spread, inventions, Confucian ideas",
+        cultureHeader: "Cultural Contributions",
+        cultureDescription: "Chinese technological innovations revolutionized warfare, navigation, and knowledge preservation globally, while Buddhist and Confucian philosophies provided new frameworks for governance, ethics, and spiritual understanding that shaped entire civilizations from Korea to Central Asia.",
+        img: "images/china emoji.png",
+        exportsImage: "images/China.png",
+        cultureImage: "images/China.png",
+        emoji: { filter: "drop-shadow(0 0 10px rgba(255, 0, 0, 0.8))" }
+    },
+    "India": {
+        title: "India - The Spiritual and Spicy Connector",
+        description: "India was a cultural and trade crossroads of East and West. It participated in both land and maritime Silk Road routes.",
+        exports: "Spices, textiles, gemstones, ivory, cotton, indigo dye",
+        exportsHeader: "Key Exports",
+        exportsDescription: "India's aromatic spices like black pepper, cinnamon, and cardamom were literally worth their weight in gold, driving European exploration for centuries, while precious gemstones, fine cotton textiles, and indigo dye became status symbols across the ancient world.",
+        culture: "Hinduism, Buddhism, mathematics, medicine, art, astronomy",
+        cultureHeader: "Cultural Contributions",
+        cultureDescription: "Indian mathematical concepts including the decimal system and zero revolutionized global mathematics, while Ayurvedic medicine and surgical techniques advanced healthcare, and Hindu-Buddhist art styles influenced temple architecture from Southeast Asia to Central Asia.",
+        img: "images/india emoji.png",
+        exportsImage: "images/China.png",
+        cultureImage: "images/China.png",
+        emoji: { filter: "drop-shadow(0 0 10px rgba(255, 186, 108, 0.8))" }
+    },
+    "Uzbekistan": {
+        title: "Uzbekistan - Oasis Cities of Central Asia",
+        description: "Uzbekistan's cities like Samarkand and Bukhara were caravan hubs where traders from China, India, Persia converged.",
+        exports: "Horses, metalwork, leather goods, dried fruits",
+        exportsHeader: "Key Exports",
+        exportsDescription: "Central Asian horses were crucial for military campaigns and long-distance travel, while expert metalworkers produced weapons and tools that were traded across continents, and dried fruits provided essential nutrition for grueling caravan journeys through harsh desert terrain.",
+        culture: "Islamic learning, arts, Persian-Chinese cultural exchange, trade facilitation",
+        cultureHeader: "Cultural Role",
+        cultureDescription: "The great cities of Samarkand and Bukhara became prestigious centers of Islamic scholarship where Persian poetry merged with Chinese philosophy, creating unique architectural styles and fostering the translation movement that preserved and transmitted ancient Greek and Indian knowledge to the world.",
+        img: "images/uzbekistan emoji.png",
+        exportsImage: "images/China.png",
+        cultureImage: "images/China.png",
+        emoji: { filter: "drop-shadow(0 0 10px rgba(0, 255, 255, 1))" }
+    },
+    "Persia": {
+        title: "Persia - The Imperial Bridge Between Worlds",
+        description: "Persia controlled many crucial Silk Road sections, linking East and West through its vast empire.",
+        exports: "Persian rugs, wine, pearls, perfume oils, metalwork, glass",
+        exportsHeader: "Key Exports",
+        exportsDescription: "Persian carpets became symbols of wealth and sophistication in palaces from China to Europe, while their fine wines, lustrous pearls from the Persian Gulf, and exquisite perfume oils set the standards for luxury goods that influenced court culture across three continents.",
+        culture: "Literature, infrastructure development, Zoroastrianism, Persian art and poetry",
+        cultureHeader: "Cultural Contributions",
+        cultureDescription: "Persian engineers built the world's most advanced road systems and caravanserais that enabled safe long-distance trade, while Persian literature and poetry became the lingua franca of educated elites from Turkey to India, and Zoroastrian concepts of good versus evil influenced major world religions.",
+        img: "images/persia emoji.png",
+        exportsImage: "images/China.png",
+        cultureImage: "images/China.png",
+        emoji: { filter: "drop-shadow(0 0 10px rgba(72, 255, 0, 1))" }
+    },
+    "Turkey": {
+        title: "Turkey - The Continental Gateway",
+        description: "Turkey was home to Constantinople, the crucial link between Asia and Europe, controlling access to European markets.",
+        exports: "Processed goods, wine, olive oil, Byzantine crafts",
+        exportsHeader: "Key Exports",
+        exportsDescription: "Constantinople's strategic position allowed it to control and tax all goods flowing between Asia and Europe, while Byzantine artisans refined Eastern silk and spices into luxury products that commanded premium prices in European markets.",
+        culture: "Byzantine heritage, blend of Christian and Islamic cultures, architectural innovations",
+        cultureHeader: "Cultural Contributions",
+        cultureDescription: "As the last remnant of the Roman Empire, Byzantium preserved classical Greek and Roman knowledge while absorbing Islamic innovations, creating magnificent architectural wonders like the Hagia Sophia that influenced both Eastern Orthodox and Islamic building traditions for centuries.",
+        img: "images/turkey emoji.png",
+        exportsImage: "images/China.png",
+        cultureImage: "images/China.png",
+        emoji: { filter: "drop-shadow(0 0 10px rgba(255, 0, 0, 0.8))" }
+    },
+    "Italy": {
+        title: "Italy - The European Endpoint",
+        description: "Italy's merchant republics like Venice and Genoa were the main European recipients and distributors of Eastern goods.",
+        exports: "European manufactured goods, wine, olive oil, glass (Venetian)",
+        exportsHeader: "Key Exports to East",
+        exportsDescription: "Italy traded European products eastward while importing Asian luxuries.",
+        culture: "Renaissance funding through trade wealth, maritime exploration, luxury culture development",
+        cultureHeader: "Cultural Impact",
+        cultureDescription: "Silk Road wealth fueled the Renaissance and European exploration age.",
+        img: "images/italy emoji.png",
+        exportsImage: "images/China.png",
+        cultureImage: "images/China.png",
+        emoji: { filter: "drop-shadow(0 0 10px rgba(21, 255, 0, 1))" }
+    }
 };
 
 
