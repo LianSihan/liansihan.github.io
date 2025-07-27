@@ -1,18 +1,38 @@
 //target all elements to save to constants
-const page1btn = document.querySelector("#page1btn");
-const page2btn = document.querySelector("#page2btn");
-const page3btn = document.querySelector("#page3btn");
-const page4btn = document.querySelector("#page4btn");
-const page5btn = document.querySelector("#page5btn");
-const page6btn = document.querySelector("#page6btn");
-const homebtn = document.querySelector("#home");
+const page1btn = document.getElementById('page1btn');
+const page2btn = document.getElementById('page2btn');
+const page3btn = document.getElementById('page3btn');
+const page4btn = document.getElementById('page4btn');
+const page5btn = document.getElementById('page5btn');
+const page6btn = document.getElementById('page6btn');
+const homebtn = document.getElementById('home');
+const musicBtn = document.getElementById('musicButton');
 
 const page1Content = document.querySelectorAll(".page1Content");
 
 const title = document.getElementById('title');
 const bar = document.getElementById('cursor');
 
+const backgroundMusic = new Audio("audio/bg.mp3");
+backgroundMusic.loop = true;
 
+const drum = new Audio("audio/drum.mp3");
+const gong = new Audio("audio/gong.mp3");
+const dot = new Audio("audio/dot.mp3");
+const drum2 = new Audio("audio/drum2.mp3");
+const travelMusic = new Audio("audio/travel.mp3");
+const win = new Audio("audio/win.mp3");
+const enemy = new Audio("audio/enemy.mp3");
+
+musicBtn.addEventListener("click", function () {
+    if (backgroundMusic.paused) {
+        backgroundMusic.play();
+        musicBtn.classList.add("playing");
+    } else {
+        backgroundMusic.pause();
+        musicBtn.classList.remove("playing");
+    }
+});
 
 var allpages = document.querySelectorAll(".page");
 //select all subtopic pages
@@ -23,6 +43,8 @@ function hideall() { //function to hide all pages
 }
 
 function show(pgno) { //function to show selected page no
+    drum.currentTime = 0;
+    drum.play();
     hideall();
     //select the page based on the parameter passed in
     let onepage = document.querySelector("#page" + pgno);
@@ -79,18 +101,32 @@ page6btn.addEventListener("click", function () {
 page1Content.forEach(content => {
     content.querySelector("button:nth-of-type(1)").addEventListener("click", () => {
         show(2);
+        navMenu.classList.remove("menuShow");
+        typeWriter(title, bar, 'Major Dynasties', 125);
+        calculateAndSetHeight();
     });
     content.querySelector("button:nth-of-type(2)").addEventListener("click", () => {
         show(3);
+        navMenu.classList.remove("menuShow");
+        typeWriter(title, bar, 'Famous Inventions', 125);
     });
     content.querySelector("button:nth-of-type(3)").addEventListener("click", () => {
         show(4);
+        navMenu.classList.remove("menuShow");
+        const ballContainerStyle = getComputedStyle(ballContainer);
+        ballContainerWidth = ballContainer.offsetWidth - parseFloat(ballContainerStyle.paddingLeft) - parseFloat(ballContainerStyle.paddingRight) - ball.offsetWidth;
+        typeWriter(title, bar, 'Silk Road & Trade', 100);
+        UpdateBallContentAndImage();
     });
     content.querySelector("button:nth-of-type(4)").addEventListener("click", () => {
         show(5);
+        navMenu.classList.remove("menuShow");
+        typeWriter(title, bar, 'Ancient Chinese Culture', 100);
     });
     content.querySelector("button:nth-of-type(5)").addEventListener("click", () => {
         show(6);
+        navMenu.classList.remove("menuShow");
+        typeWriter(title, bar, 'Game', 100);
     });
 });
 
@@ -145,73 +181,108 @@ document.addEventListener("DOMContentLoaded", () => {
 const dynastyInfo = {
     "Xia": {
         title: "Xia Dynasty (c. 2100-1600 BCE)",
-        description: "The legendary first dynasty in traditional Chinese history. No archaeological proof, but it's believed to mark the start of civilization in China."
+        description: "The legendary first dynasty in traditional Chinese history. No archaeological proof, but it's believed to mark the start of civilization in China.",
+        col: 0,
+        row: 0
     },
     "Shang": {
         title: "Shang Dynasty (c. 1600-1046 BCE)",
-        description: "The first confirmed dynasty with writing and bronze tools. Famous for oracle bones and early Chinese script."
+        description: "The first confirmed dynasty with writing and bronze tools. Famous for oracle bones and early Chinese script.",
+        col: 1,
+        row: 0
     },
     "Zhou": {
         title: "Zhou Dynasty (1046-256 BCE)",
-        description: "The longest dynasty, marked by the Mandate of Heaven and split into Western and Eastern Zhou."
+        description: "The longest dynasty, marked by the Mandate of Heaven and split into Western and Eastern Zhou.",
+        col: 2,
+        row: 0
     },
     "Warring": {
         title: "End of Warring States Period (256 BCE)",
-        description: "Marks the end of the chaotic Warring States period and the beginning of Qin unification."
+        description: "Marks the end of the chaotic Warring States period and the beginning of Qin unification.",
+        col: 3,
+        row: 0
     },
     "Han": {
         title: "Han Dynasty (206 BCE-220 CE)",
-        description: "Golden age of Chinese civilization, known for major advancements in culture, science, and the Silk Road trade."
+        description: "Golden age of Chinese civilization, known for major advancements in culture, science, and the Silk Road trade.",
+        col: 4,
+        row: 0
     },
     "Three": {
         title: "Three Kingdoms Period (220-280 CE)",
-        description: "Division of China into three rival kingdoms: Wei, Shu, and Wu, following the fall of the Han."
+        description: "Division of China into three rival kingdoms: Wei, Shu, and Wu, following the fall of the Han.",
+        col: 0,
+        row: 1
     },
     "Western": {
         title: "Western Jin Dynasty (265-316 CE)",
-        description: "Brief reunification of China before collapse due to civil war and invasion."
+        description: "Brief reunification of China before collapse due to civil war and invasion.",
+        col: 1,
+        row: 1
     },
     "Sui": {
         title: "Sui Dynasty (581-618 CE)",
-        description: "Short dynasty that reunified China and constructed the Grand Canal."
+        description: "Short dynasty that reunified China and constructed the Grand Canal.",
+        col: 2,
+        row: 1
     },
     "Tang": {
         title: "Tang Dynasty (618-907 CE)",
-        description: "A cultural golden age with flourishing arts, poetry, and international trade along the Silk Road."
+        description: "A cultural golden age with flourishing arts, poetry, and international trade along the Silk Road.",
+        col: 3,
+        row: 1
     },
     "Five": {
         title: "Five Dynasties Period (907-960 CE)",
-        description: "A time of fragmentation with rapid succession of short-lived dynasties."
+        description: "A time of fragmentation with rapid succession of short-lived dynasties.",
+        col: 4,
+        row: 1
     },
     "Song": {
         title: "Song Dynasty (960-1279 CE)",
-        description: "Era of technological and economic advances; divided into Northern and Southern Song periods."
+        description: "Era of technological and economic advances; divided into Northern and Southern Song periods.",
+        col: 0,
+        row: 2
     },
     "Yuan": {
         title: "Yuan Dynasty (1271-1368 CE)",
-        description: "Established by the Mongols under Kublai Khan; first foreign-led dynasty of China."
+        description: "Established by the Mongols under Kublai Khan; first foreign-led dynasty of China.",
+        col: 1,
+        row: 2
     },
     "Ming": {
         title: "Ming Dynasty (1368-1644 CE)",
-        description: "Known for restoring Han rule, naval expeditions, and building much of the Great Wall as it stands today."
+        description: "Known for restoring Han rule, naval expeditions, and building much of the Great Wall as it stands today.",
+        col: 2,
+        row: 2
     },
     "Qing": {
         title: "Qing Dynasty (1644-1912 CE)",
-        description: "Last imperial dynasty ruled by the Manchus; ended with the Xinhai Revolution and establishment of the Republic."
+        description: "Last imperial dynasty ruled by the Manchus; ended with the Xinhai Revolution and establishment of the Republic.",
+        col: 3,
+        row: 2
     },
-    "Republic": {
-        title: "Republic of China (1912-present)",
-        description: "The end of imperial rule and start of modern Chinese government, with continuing historical significance today."
+    "People's": {
+        title: "People's Republic of China (1912-present)",
+        description: "The end of imperial rule and start of modern Chinese government, with continuing historical significance today.",
+        col: 4,
+        row: 2
     }
 };
 
 document.querySelectorAll('.dynasty button').forEach(button => {
     button.addEventListener('click', () => {
+        gong.currentTime = 0;
+        gong.play();
         const dynastyName = button.textContent.split(' ')[0];
         const info = dynastyInfo[dynastyName];
         if (info) {
             document.getElementById('dynastytitle').textContent = info.title;
             document.getElementById('dynastydescription').textContent = info.description;
+            let x = (info.col / 4) * 100;
+            let y = (info.row / 2) * 100;
+            document.getElementById('dynastyimage').style.backgroundPosition = `${x}% ${y}%`;
             document.getElementById('dynastyinfo').classList.toggle('show');
         }
     });
@@ -225,12 +296,16 @@ document.getElementById('closebutton').addEventListener('click', () => {
 const tiles = document.querySelectorAll('.blockingtile');
 tiles.forEach(tile => {
     tile.addEventListener('click', () => {
+        drum2.currentTime = 0;
+        drum2.play();
         tile.classList.add('gone');
     });
 });
 
 const page3Reset = document.querySelector('#inventions > button');
 page3Reset.addEventListener('click', () => {
+    drum2.currentTime = 0;
+    drum2.play();
     tiles.forEach(tile => {
         tile.classList.remove('gone');
     });
@@ -250,96 +325,6 @@ quizButton.addEventListener('click', () => {
         quizButton.textContent = 'Exit Quiz';
     }
 });
-
-
-const popAudio = new Audio("popsound.mp3");
-const durianId = document.getElementById("durianId");
-function GetRandom(min, max) {
-    //this will select a number between min and max
-    return Math.round(Math.random() * (max - min)) + min;
-}
-function MoveDurian() {
-    durianId.style.left = GetRandom(0, 500) + "px";
-    durianId.style.top = GetRandom(0, 250) + "px";
-}
-
-// moveDurianItvId = setInterval(MoveDurian, 1000);
-
-// const scoreBox=document.getElementById("scoreBox");
-// var score=0; //to track how many clicks
-// function durianCatch() {
-//     //increases score after clicking
-//     score++;
-//     //update html scorebox
-//     scoreBox.innerHTML = "Score: " + score;
-//     popAudio.play(); //play the audio!
-//     durianId.classList.add("animation");
-
-//     if (score <= 80) {
-//         MoveDurian(); //move durian to new position
-//         moveDurianItvId = clearInterval(moveDurianItvId);
-//         moveDurianItvId = setInterval(MoveDurian, 1000 - (score * 10));
-//     }
-// }
-// //link durian to mouseclick to durianCatch function
-// durianId.addEventListener("click",durianCatch);
-
-
-// var ballX = ballY = 0;
-// //define more variables and constants
-// var velX, velY;
-// const minLeft = minTop = 0;
-// const maxTop = maxLeft = 300;
-
-// //function to pick random number from a min-max range
-// function RandomRange(min, max) {
-//     return Math.round(Math.random() * (max - min) + min);
-// }
-
-// /* Move Pos function with collision check and reaction*/
-// function MovePosWifCollision() {
-//     ballX += velX;
-//     ballY += velY;
-
-//     /*check if reach min/max left/top and flip velocity*/
-//     if (ballX > maxLeft) {
-//         velX = -velX; //reverse the X velocity
-//         ballX = maxLeft; //snap ballX to maxLeft
-//     }
-//     if (ballY > maxTop) {
-//         velY = -velY;
-//         ballY = maxTop; //snap ballY to maxTop
-//     }
-//     if (ballX < minLeft) {
-//         velX = -velX;
-//         ballX = minLeft;
-//     }
-//     if (ballY < minTop) {
-//         velY = -velY;
-//         ballY = minTop;
-//     }
-
-//     UpdateBallStyle();
-// }
-// //Modify StartAutoMove function
-// function StartAutoMove() {
-//     velX = RandomRange(-10, 10);
-//     velY = RandomRange(-10, 30);
-//     //setInterval(MoveIt,100); don't use this anymore
-//     setInterval(MovePosWifCollision, 10); //use this instead
-// }
-
-
-// StartAutoMove(); //invoke the function to activate automove
-
-
-// //function to update ball css as well as display text
-// function UpdateBallStyle() {
-//     durianId.style.left = ballX + "px"; //set left property to ball x variable
-//     durianId.style.top = ballY + "px"; //set top property to ball x variable
-// }
-
-
 
 
 
@@ -518,8 +503,13 @@ function travel() {
     }
 
     if (Math.random() < 0.5) {
+        travelMusic.pause();
+        enemy.currentTime = 0;
+        enemy.play();
         startCombat();
     } else {
+        travelMusic.currentTime = 0;
+        travelMusic.play();
         moveNext();
     }
 }
@@ -614,7 +604,7 @@ function startCombat() {
 function spawnEnemy() {
     const enemy = document.createElement("img");
     enemy.classList.add("enemy");
-    enemy.src = "images/china.png";
+    enemy.src = "images/bandit.png";
     enemy.alt = "Bandit";
     enemy.style.left = 20 + Math.random() * (banditArea.offsetWidth - 80) + 'px';
     enemy.style.top =  20 + Math.random() * (banditArea.offsetHeight - 80) + 'px';
@@ -625,7 +615,7 @@ function spawnEnemy() {
         if (combatTimer <= 0) {
             enemy.remove();
         }
-    }, 2000);
+    }, 1000);
 
     enemy.onclick = function() {
         if (enemy.style.opacity === "0") {
@@ -691,6 +681,11 @@ function endGame() {
         }
     }
 
+    enemy.pause();
+    travelMusic.pause();
+    win.currentTime = 0;
+    win.play();
+
     endMessage.innerHTML = `
         <p>Congratulations! You have reached Italy and sold everything!</p>
         <p>You have profitted ${total + gold - 100} Gold</p>
@@ -719,6 +714,10 @@ function resetGame() {
     goldAmt.innerHTML = ``;
     progress.innerHTML = ``;
     updateInventory();
+
+    win.pause();
+    enemy.pause();
+    travelMusic.pause();
 }
 
 
@@ -744,11 +743,15 @@ var ballX = ballY = 0; //assign initial position of ball
 
 //functions to update variables to control ball position
 function ResetPos() {
+    dot.currentTime = 0;
+    dot.play();
     ballX=ballY=0; //reset to zero
     UpdateBallStyle();
 }
 
 function MovePos(leftInc) {
+    dot.currentTime = 0;
+    dot.play();
     ballX += leftInc;
     UpdateBallStyle();
 }
@@ -806,8 +809,8 @@ const regionInfo = {
         cultureHeader: "Cultural Contributions",
         cultureDescription: "Chinese technological innovations revolutionized warfare, navigation, and knowledge preservation globally, while Buddhist and Confucian philosophies provided new frameworks for governance, ethics, and spiritual understanding that shaped entire civilizations from Korea to Central Asia.",
         img: "images/china emoji.png",
-        exportsImage: "images/China.png",
-        cultureImage: "images/China.png",
+        exportsImage: "images/silk.webp",
+        cultureImage: "images/buddhism.webp",
         emoji: { filter: "drop-shadow(0 0 10px rgba(255, 0, 0, 0.8))" }
     },
     "India": {
@@ -820,8 +823,8 @@ const regionInfo = {
         cultureHeader: "Cultural Contributions",
         cultureDescription: "Indian mathematical concepts including the decimal system and zero revolutionized global mathematics, while Ayurvedic medicine and surgical techniques advanced healthcare, and Hindu-Buddhist art styles influenced temple architecture from Southeast Asia to Central Asia.",
         img: "images/india emoji.png",
-        exportsImage: "images/China.png",
-        cultureImage: "images/China.png",
+        exportsImage: "images/spices.webp",
+        cultureImage: "images/hinduism.webp",
         emoji: { filter: "drop-shadow(0 0 10px rgba(255, 186, 108, 0.8))" }
     },
     "Uzbekistan": {
@@ -834,8 +837,8 @@ const regionInfo = {
         cultureHeader: "Cultural Role",
         cultureDescription: "The great cities of Samarkand and Bukhara became prestigious centers of Islamic scholarship where Persian poetry merged with Chinese philosophy, creating unique architectural styles and fostering the translation movement that preserved and transmitted ancient Greek and Indian knowledge to the world.",
         img: "images/uzbekistan emoji.png",
-        exportsImage: "images/China.png",
-        cultureImage: "images/China.png",
+        exportsImage: "images/dried.webp",
+        cultureImage: "images/islam.webp",
         emoji: { filter: "drop-shadow(0 0 10px rgba(0, 255, 255, 1))" }
     },
     "Persia": {
@@ -848,8 +851,8 @@ const regionInfo = {
         cultureHeader: "Cultural Contributions",
         cultureDescription: "Persian engineers built the world's most advanced road systems and caravanserais that enabled safe long-distance trade, while Persian literature and poetry became the lingua franca of educated elites from Turkey to India, and Zoroastrian concepts of good versus evil influenced major world religions.",
         img: "images/persia emoji.png",
-        exportsImage: "images/China.png",
-        cultureImage: "images/China.png",
+        exportsImage: "images/rug.webp",
+        cultureImage: "images/literature.webp",
         emoji: { filter: "drop-shadow(0 0 10px rgba(72, 255, 0, 1))" }
     },
     "Turkey": {
@@ -862,8 +865,8 @@ const regionInfo = {
         cultureHeader: "Cultural Contributions",
         cultureDescription: "As the last remnant of the Roman Empire, Byzantium preserved classical Greek and Roman knowledge while absorbing Islamic innovations, creating magnificent architectural wonders like the Hagia Sophia that influenced both Eastern Orthodox and Islamic building traditions for centuries.",
         img: "images/turkey emoji.png",
-        exportsImage: "images/China.png",
-        cultureImage: "images/China.png",
+        exportsImage: "images/art.webp",
+        cultureImage: "images/christian.webp",
         emoji: { filter: "drop-shadow(0 0 10px rgba(255, 0, 0, 0.8))" }
     },
     "Italy": {
@@ -876,8 +879,8 @@ const regionInfo = {
         cultureHeader: "Cultural Impact",
         cultureDescription: "Silk Road wealth fueled the Renaissance and European exploration age.",
         img: "images/italy emoji.png",
-        exportsImage: "images/China.png",
-        cultureImage: "images/China.png",
+        exportsImage: "images/glass.webp",
+        cultureImage: "images/maritime.webp",
         emoji: { filter: "drop-shadow(0 0 10px rgba(21, 255, 0, 1))" }
     }
 };
@@ -1008,7 +1011,6 @@ function typeWriter(title, bar, text, timeout) {
 const rightContainer = document.querySelector('#page2 > div > section:first-of-type');
 
 function calculateAndSetHeight() {
-    console.log('Client width:', window.innerWidth);
     if (window.innerWidth > 800) {
         rightContainer.style.maxHeight = 1 + 'px';
         rightContainer.offsetHeight;
@@ -1031,5 +1033,7 @@ window.addEventListener('load', function() {
     typeWriter(title, bar, 'CHINA', 150);
     calculateAndSetHeight();
 });
+
+
 
 
