@@ -59,7 +59,7 @@ homebtn.addEventListener("click", function () {
     navMenu.classList.remove("menuShow");
     if (!homebtn.classList.contains("animation")) {
         homebtn.classList.add("animation");
-        setTimeout(() => {
+        setTimeout(function () {
             homebtn.classList.remove("animation");
         }, 2000);
     }
@@ -113,8 +113,8 @@ page6btn.addEventListener("click", function () {
     drum.currentTime = 0;
     drum.play();
 });
-page1Content.forEach(content => {
-    content.querySelector("button:nth-of-type(1)").addEventListener("click", () => {
+page1Content.forEach(function (content) {
+    content.querySelector("aside:nth-of-type(1)").addEventListener("click", function () {
         show(2);
         navMenu.classList.remove("menuShow");
         typeWriter(title, bar, 'Major Dynasties', 125);
@@ -122,14 +122,14 @@ page1Content.forEach(content => {
         drum.currentTime = 0;
         drum.play();
     });
-    content.querySelector("button:nth-of-type(2)").addEventListener("click", () => {
+    content.querySelector("aside:nth-of-type(2)").addEventListener("click", function () {
         show(3);
         navMenu.classList.remove("menuShow");
         typeWriter(title, bar, 'Famous Inventions', 125);
         drum.currentTime = 0;
         drum.play();
     });
-    content.querySelector("button:nth-of-type(3)").addEventListener("click", () => {
+    content.querySelector("aside:nth-of-type(3)").addEventListener("click", function () {
         show(4);
         navMenu.classList.remove("menuShow");
         const ballContainerStyle = getComputedStyle(ballContainer);
@@ -139,14 +139,14 @@ page1Content.forEach(content => {
         drum.currentTime = 0;
         drum.play();
     });
-    content.querySelector("button:nth-of-type(4)").addEventListener("click", () => {
+    content.querySelector("aside:nth-of-type(4)").addEventListener("click", function () {
         show(5);
         navMenu.classList.remove("menuShow");
         typeWriter(title, bar, 'Ancient Chinese Culture', 100);
         drum.currentTime = 0;
         drum.play();
     });
-    content.querySelector("button:nth-of-type(5)").addEventListener("click", () => {
+    content.querySelector("aside:nth-of-type(5)").addEventListener("click", function () {
         show(6);
         navMenu.classList.remove("menuShow");
         typeWriter(title, bar, 'Game', 100);
@@ -163,17 +163,17 @@ const navMenu = document.getElementById("sideMenu"); // the menu to show/hide
 const closeBtn = document.getElementById("closeMenu");
 
 
-hamBtn.addEventListener("click", () => {
+hamBtn.addEventListener("click", function () {
     navMenu.classList.add("menuShow");
 });
 
-closeBtn.addEventListener("click", () => {
+closeBtn.addEventListener("click", function () {
     navMenu.classList.remove("menuShow");
 });
 
-const flipCards = document.querySelectorAll('#flip');
+const flipCards = document.querySelectorAll('.flip');
             
-flipCards.forEach(card => {
+flipCards.forEach(function(card) {
     card.addEventListener('click', function() {
         dot.currentTime = 0;
         dot.play();
@@ -182,12 +182,12 @@ flipCards.forEach(card => {
 });
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
     const dynasties = document.querySelectorAll('.dynasty');
     const date = document.querySelectorAll('.date');
 
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             } else {
@@ -198,8 +198,12 @@ document.addEventListener("DOMContentLoaded", () => {
         threshold: 0.5
     });
 
-    dynasties.forEach(dynasty => observer.observe(dynasty));
-    date.forEach(date => observer.observe(date));
+    dynasties.forEach(function (dynasty) {
+        observer.observe(dynasty);
+    });
+    date.forEach(function (date) {
+        observer.observe(date);
+    });
 });
 
 
@@ -298,8 +302,8 @@ const dynastyInfo = {
     }
 };
 
-document.querySelectorAll('.dynasty button').forEach(button => {
-    button.addEventListener('click', () => {
+document.querySelectorAll('.dynasty button').forEach(function (button) {
+    button.addEventListener('click', function () {
         gong.currentTime = 0;
         gong.play();
         const dynastyName = button.textContent.split(' ')[0];
@@ -309,20 +313,20 @@ document.querySelectorAll('.dynasty button').forEach(button => {
             document.getElementById('dynastydescription').textContent = info.description;
             let x = (info.col / 4) * 100;
             let y = (info.row / 2) * 100;
-            document.getElementById('dynastyimage').style.backgroundPosition = `${x}% ${y}%`;
+            document.getElementById('dynastyimage').style.backgroundPosition = x + '% ' + y + '%';
             document.getElementById('dynastyinfo').classList.toggle('show');
         }
     });
 });
 
-document.getElementById('closebutton').addEventListener('click', () => {
+document.getElementById('closebutton').addEventListener('click', function () {
     document.getElementById('dynastyinfo').classList.toggle('show');
 });
 
 
 const tiles = document.querySelectorAll('.blockingtile');
-tiles.forEach(tile => {
-    tile.addEventListener('click', () => {
+tiles.forEach(function (tile) {
+    tile.addEventListener('click', function () {
         drum2.currentTime = 0;
         drum2.play();
         tile.classList.add('gone');
@@ -330,10 +334,10 @@ tiles.forEach(tile => {
 });
 
 const page3Reset = document.querySelector('#inventions > button');
-page3Reset.addEventListener('click', () => {
+page3Reset.addEventListener('click', function () {
     drum2.currentTime = 0;
     drum2.play();
-    tiles.forEach(tile => {
+    tiles.forEach(function (tile) {
         tile.classList.remove('gone');
     });
 });
@@ -342,7 +346,7 @@ const inventions = document.querySelector('#inventions');
 const quizButton = document.querySelector('#quizButton > button');
 const quiz = document.querySelector('#quiz');
 
-quizButton.addEventListener('click', () => {
+quizButton.addEventListener('click', function () {
     quiz.classList.toggle('gone');
     inventions.classList.toggle('gone');
     if (quiz.classList.contains('gone')) {
@@ -412,12 +416,12 @@ function CheckAns() {
         score++;
     }
 
-    quizResult.innerHTML = `<h2>Your Score: ${score}/6</h2>`;
+    quizResult.innerHTML = "<h2>Your Score: " + score + "/6</h2>";
 }
 
-reset.addEventListener("click", () => {
+reset.addEventListener("click", function () {
     // Reset all input fields
-    document.querySelectorAll("input").forEach(input => {
+    document.querySelectorAll("input").forEach(function (input) {
         if (input.type === "checkbox" || input.type === "radio") {
             input.checked = false;
         } else {
@@ -426,7 +430,7 @@ reset.addEventListener("click", () => {
     });
 
     // Reset all select dropdowns
-    document.querySelectorAll("select").forEach(select => {
+    document.querySelectorAll("select").forEach(function (select) {
         select.selectedIndex = 0;
     });
 });
@@ -542,23 +546,23 @@ function travel() {
 }
 
 function updateStats() {
-    where.innerHTML = `<p>Location: ${locations[player]}</p>`;
-    goldAmt.innerHTML = `<p>Gold: ${gold}</p>`;
-    progress.innerHTML = `<p>Progress: ${player + 1}/6</p>`;
+    where.innerHTML = '<p>Location: ' + locations[player] + '</p>';
+    goldAmt.innerHTML = '<p>Gold: ' + gold + '</p>';
+    progress.innerHTML = '<p>Progress: ' + (player + 1) + '/6</p>';
 }
 
 function updateShop() {
     const shopItems = items[locations[player]];
-    shopItems.forEach((item, index) => {
-        const product = document.getElementById(`item${index + 1}`);
+    shopItems.forEach(function (item, index) {
+        const product = document.getElementById('item' + (index + 1));
         const name = product.querySelector("p:nth-child(1)");
         const cost = product.querySelector("p:nth-child(2)");
         const itemBtn = product.querySelector("button");
 
         name.textContent = item.name;
-        cost.textContent = `Price: ${item.price} Gold`;
+        cost.textContent = 'Price: ' + item.price + ' Gold';
 
-        itemBtn.onclick = () => {
+        itemBtn.onclick = function () {
             buyItem(item.name, item.price);
         };
     });
@@ -585,7 +589,7 @@ function updateInventory() {
     const inv = document.getElementById('inventoryItems');
     inv.innerHTML = '';
 
-    empty = true;
+    let empty = true;
 
     for (let item in inventory) {
         empty = false;
@@ -594,6 +598,7 @@ function updateInventory() {
         div.textContent = item + ": " + amount;
         inv.appendChild(div);
     }
+    
 
     if (empty) {
         const div = document.createElement('div');
@@ -613,16 +618,14 @@ function startCombat() {
         spawnEnemy();
     }
 
-    timer = setInterval(() => {
+    timer = setInterval(function () {
         combatTimer--;
         time.textContent = combatTimer;
 
         if (combatTimer <= 0) {
             lose.currentTime = 0;
             lose.play();
-            endMessage.innerHTML = `
-                <p>Game Over! You were robbed by the bandits.</p>
-            `;
+            endMessage.innerHTML = '<p>Game Over! You were robbed by the bandits.</p>';
             enemyArea.classList.add("gone");
             gameOverArea.classList.remove("gone");
             clearInterval(timer);
@@ -638,7 +641,7 @@ function spawnEnemy() {
     enemy.style.left = 20 + Math.random() * (banditArea.offsetWidth - 80) + 'px';
     enemy.style.top =  20 + Math.random() * (banditArea.offsetHeight - 80) + 'px';
 
-    const interval = setInterval(() => {
+    const interval = setInterval(function () {
         enemy.style.left = 20 + Math.random() * (banditArea.offsetWidth - 80) + 'px';
         enemy.style.top =  20 + Math.random() * (banditArea.offsetHeight - 80) + 'px';
         if (combatTimer <= 0) {
@@ -677,7 +680,7 @@ function moveNext() {
     if (player >= locations.length - 1) {
         endGame();
     } else {
-        place.textContent = `You are now in ${locations[player]}`;
+        place.textContent = 'You are now in ' + locations[player];
         updateStats();
         enemyArea.classList.add("gone");
         mainArea.classList.remove("gone");
@@ -718,10 +721,9 @@ function endGame() {
     win.currentTime = 0;
     win.play();
 
-    endMessage.innerHTML = `
-        <p>Congratulations! You have reached Italy and sold everything!</p>
-        <p>You have profitted ${total + gold - 100} Gold</p>
-    `;
+    endMessage.innerHTML = 
+    '<p>Congratulations! You have reached Italy and sold everything!</p>' +
+    '<p>You have profitted ' + (total + gold - 100) + ' Gold</p>';
     enemyArea.classList.add("gone");
     mainArea.classList.add("gone");
     gameOverArea.classList.remove("gone");
@@ -742,9 +744,9 @@ function resetGame() {
     enemyArea.classList.add("gone");
     gameOverArea.classList.add("gone");
     startArea.classList.remove("gone");
-    where.innerHTML = `<p>Start First</p>`;
-    goldAmt.innerHTML = ``;
-    progress.innerHTML = ``;
+    where.innerHTML = '<p>Start First</p>';
+    goldAmt.innerHTML = '';
+    progress.innerHTML = '';
     updateInventory();
 
     win.pause();
@@ -771,7 +773,8 @@ const ballContainerStyle = getComputedStyle(ballContainer);
 let ballContainerWidth = ballContainer.offsetWidth - parseFloat(ballContainerStyle.paddingLeft) - parseFloat(ballContainerStyle.paddingRight) - ball.offsetWidth;
 const ballImage = ball.querySelector("img");
 const ballContent = document.querySelector("#ballContent");
-var ballX = ballY = 0; //assign initial position of ball
+var ballX = 0; //assign initial position of ball
+var ballY = 0;
 
 //functions to update variables to control ball position
 function ResetPos() {
@@ -803,7 +806,7 @@ function UpdateBallStyle(){
 
 //eventlisteners to activate MovePos
 leftBtn.addEventListener("click", function () {
-    MovePos(-ballContainerWidth/5)
+    MovePos(-ballContainerWidth/5);
 });
 
 //leftBtn.addEventListener("click", MoveLeft(-10,0)); //wrong
@@ -811,13 +814,13 @@ leftBtn.addEventListener("click", function () {
 
 //using anonymous function to pass in arguments from eventlistener
 rightBtn.addEventListener("click", function () {
-    MovePos(ballContainerWidth/5)
+    MovePos(ballContainerWidth/5);
 });
 
 resetBtn.addEventListener("click", ResetPos);
 
 
-document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', function (e) {
     if (e.repeat) return;
 
     switch (e.code) {
@@ -840,7 +843,7 @@ const regionInfo = {
         culture: "Buddhism spread, inventions, Confucian ideas",
         cultureHeader: "Cultural Contributions",
         cultureDescription: "Chinese technological innovations revolutionized warfare, navigation, and knowledge preservation globally, while Buddhist and Confucian philosophies provided new frameworks for governance, ethics, and spiritual understanding that shaped entire civilizations from Korea to Central Asia.",
-        img: "images/china emoji.png",
+        img: "images/chinaEmoji.png",
         exportsImage: "images/silk.webp",
         cultureImage: "images/buddhism.webp",
         emoji: { filter: "drop-shadow(0 0 10px rgba(255, 0, 0, 0.8))" }
@@ -854,7 +857,7 @@ const regionInfo = {
         culture: "Hinduism, Buddhism, mathematics, medicine, art, astronomy",
         cultureHeader: "Cultural Contributions",
         cultureDescription: "Indian mathematical concepts including the decimal system and zero revolutionized global mathematics, while Ayurvedic medicine and surgical techniques advanced healthcare, and Hindu-Buddhist art styles influenced temple architecture from Southeast Asia to Central Asia.",
-        img: "images/india emoji.png",
+        img: "images/indiaEmoji.png",
         exportsImage: "images/spices.webp",
         cultureImage: "images/hinduism.webp",
         emoji: { filter: "drop-shadow(0 0 10px rgba(255, 186, 108, 0.8))" }
@@ -868,7 +871,7 @@ const regionInfo = {
         culture: "Islamic learning, arts, Persian-Chinese cultural exchange, trade facilitation",
         cultureHeader: "Cultural Role",
         cultureDescription: "The great cities of Samarkand and Bukhara became prestigious centers of Islamic scholarship where Persian poetry merged with Chinese philosophy, creating unique architectural styles and fostering the translation movement that preserved and transmitted ancient Greek and Indian knowledge to the world.",
-        img: "images/uzbekistan emoji.png",
+        img: "images/uzbekistanEmoji.png",
         exportsImage: "images/dried.webp",
         cultureImage: "images/islam.webp",
         emoji: { filter: "drop-shadow(0 0 10px rgba(0, 255, 255, 1))" }
@@ -882,7 +885,7 @@ const regionInfo = {
         culture: "Literature, infrastructure development, Zoroastrianism, Persian art and poetry",
         cultureHeader: "Cultural Contributions",
         cultureDescription: "Persian engineers built the world's most advanced road systems and caravanserais that enabled safe long-distance trade, while Persian literature and poetry became the lingua franca of educated elites from Turkey to India, and Zoroastrian concepts of good versus evil influenced major world religions.",
-        img: "images/persia emoji.png",
+        img: "images/persiaEmoji.png",
         exportsImage: "images/rug.webp",
         cultureImage: "images/literature.webp",
         emoji: { filter: "drop-shadow(0 0 10px rgba(72, 255, 0, 1))" }
@@ -896,7 +899,7 @@ const regionInfo = {
         culture: "Byzantine heritage, blend of Christian and Islamic cultures, architectural innovations",
         cultureHeader: "Cultural Contributions",
         cultureDescription: "As the last remnant of the Roman Empire, Byzantium preserved classical Greek and Roman knowledge while absorbing Islamic innovations, creating magnificent architectural wonders like the Hagia Sophia that influenced both Eastern Orthodox and Islamic building traditions for centuries.",
-        img: "images/turkey emoji.png",
+        img: "images/turkeyEmoji.png",
         exportsImage: "images/art.webp",
         cultureImage: "images/christian.webp",
         emoji: { filter: "drop-shadow(0 0 10px rgba(255, 0, 0, 0.8))" }
@@ -910,7 +913,7 @@ const regionInfo = {
         culture: "Renaissance funding through trade wealth, maritime exploration, luxury culture development",
         cultureHeader: "Cultural Impact",
         cultureDescription: "Silk Road wealth fueled the Renaissance and European exploration age.",
-        img: "images/italy emoji.png",
+        img: "images/italyEmoji.png",
         exportsImage: "images/glass.webp",
         cultureImage: "images/maritime.webp",
         emoji: { filter: "drop-shadow(0 0 10px rgba(21, 255, 0, 1))" }
@@ -919,16 +922,14 @@ const regionInfo = {
 
 
 let currentImage = "images/china emoji.png";
-ballContent.innerHTML = `
-    <h1>${regionInfo["China"].title}</h1>
-    <p>${regionInfo["China"].description}</p>
-    <aside><img src="${regionInfo["China"].exportsImage}" alt="exports Image"></aside>
-    <article><b>${regionInfo["China"].exportsHeader}</b><p>${regionInfo["China"].exports}</p>
-    <p class="description">${regionInfo["China"].exportsDescription}</p></article>
-    <article><b>${regionInfo["China"].cultureHeader}</b><p>${regionInfo["China"].culture}</p>
-    <p class="description">${regionInfo["China"].cultureDescription}</p></article>
-    <aside><img src="${regionInfo["China"].cultureImage}" alt="culture Image"></aside>
-`;
+ballContent.innerHTML = '<h1>' + regionInfo.China.title + '</h1>' +
+    '<p>' + regionInfo.China.description + '</p>' +
+    '<aside><img src="' + regionInfo.China.exportsImage + '" alt="exports Image"></aside>' +
+    '<article><b>' + regionInfo.China.exportsHeader + '</b><p>' + regionInfo.China.exports + '</p>' +
+    '<p class="description">' + regionInfo.China.exportsDescription + '</p></article>' +
+    '<article><b>' + regionInfo.China.cultureHeader + '</b><p>' + regionInfo.China.culture + '</p>' +
+    '<p class="description">' + regionInfo.China.cultureDescription + '</p></article>' +
+    '<aside><img src="' + regionInfo.China.cultureImage + '" alt="culture Image"></aside>';
 
 function UpdateBallContentAndImage() {
     const cutOff = ballContainerWidth / 5;
@@ -962,7 +963,7 @@ function UpdateBallContentAndImage() {
 
         const targetRegion = regionKey;
 
-        setTimeout(() => {
+        setTimeout(function () {
             let regionCheck = "";
             if (ballX >= 0 && ballX < cutOff / 2) {
                 regionCheck = "China";
@@ -993,16 +994,15 @@ function UpdateBallContentAndImage() {
             ballImage.style.filter = "none";
             ballImage.style.filter = info.emoji.filter;
             currentImage = info.img;
-            ballContent.innerHTML = `
-                <h1>${info.title}</h1>
-                <p>${info.description}</p>
-                <aside><img src="${info.exportsImage}" alt="exports Image"></aside>
-                <article><b>${info.exportsHeader}</b> <p>${info.exports}</p>
-                <p class="description">${info.exportsDescription}</p></article>
-                <article><b>${info.cultureHeader}</b> <p>${info.culture}</p>
-                <p class="description">${info.cultureDescription}</p></article>
-                <aside><img src="${info.cultureImage}" alt="culture Image"></aside>
-            `;
+            ballContent.innerHTML = '<h1>' + info.title + '</h1>' +
+                '<p>' + info.description + '</p>' +
+                '<aside><img src="' + info.exportsImage + '" alt="exports Image"></aside>' +
+                '<article><b>' + info.exportsHeader + '</b> <p>' + info.exports + '</p>' +
+                '<p class="description">' + info.exportsDescription + '</p></article>' +
+                '<article><b>' + info.cultureHeader + '</b> <p>' + info.culture + '</p>' +
+                '<p class="description">' + info.cultureDescription + '</p></article>' +
+                '<aside><img src="' + info.cultureImage + '" alt="culture Image"></aside>';
+
             ballImage.style.opacity = 1;
             ballImage.style.transform = "scale(1)";
         }, 200);
@@ -1045,7 +1045,7 @@ const rightContainer = document.querySelector('#page2 > div > section:first-of-t
 function calculateAndSetHeight() {
     if (window.innerWidth > 800) {
         rightContainer.style.maxHeight = 1 + 'px';
-        rightContainer.offsetHeight;
+        rightContainer.offsetHeight = rightContainer.offsetHeight;
 
         const leftContainer1 = document.querySelector('#page2 > div > section:nth-of-type(2)');
         const leftContainer2 = document.querySelector('#page2 > div > section:nth-of-type(3)');

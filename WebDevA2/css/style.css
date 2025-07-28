@@ -71,7 +71,7 @@ body header button img {
 }
 
 body header button.animation {
-    animation: rotate 2s ease-in-out;
+    animation: bounce 2s ease-in-out;
 }
 
 body header button img:hover {
@@ -207,14 +207,14 @@ body header button img:hover {
     gap: 20px;
 }
 
-.page1Content button {
+.page1Content div > div > aside {
     border: 0;
     background: transparent;
     color: rgb(73, 41, 26);
     cursor: pointer;
 }
 
-.page1Content aside {
+.page1Content div > div > aside {
     background: rgb(206,175,147);
     border: 2px solid rgb(121, 103, 88);
     border-radius: 10px;
@@ -223,24 +223,24 @@ body header button img:hover {
     text-align: left;
 }
 
-.page1Content aside:hover {
+.page1Content div > div > aside:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px #00000020;
     background: rgb(180, 153, 129);
 }
 
-.page1Content aside p {
+.page1Content div > div > aside  p {
     text-align: justify;
     font-size: 1rem;
     line-height: 1.6;
 }
 
-.page1Content aside h3 {
+.page1Content div > div > aside  h3 {
     text-align: center;
     font-size: 1.5rem;
 }
 
-.page1Content aside > div {
+.page1Content div > div > aside > div {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -249,7 +249,7 @@ body header button img:hover {
     margin-bottom: 10px;
 }
 
-#logo {
+.logo {
     color: white;
     background: #5c3f2d;
     width: 30px;
@@ -471,7 +471,7 @@ body header button img:hover {
     padding-bottom: 10px;
 }
 
-#option {
+.option {
     padding: 10px;
     border: 2px solid rgb(184, 168, 143);
     border-radius: 10px;
@@ -480,6 +480,7 @@ body header button img:hover {
     width: 300px;
     text-align: center;
     transition: all 0.3s ease;
+    display: block;
 }
 
 #checkboxes {
@@ -612,13 +613,13 @@ select {
     color: white;
 }
 
-#flip {
+.flip {
     width: 100%;
     height: 250px;
     perspective: 1000px;
 }
 
-#flipInner {
+.flipInner {
     width: 100%;
     height: 100%;
     position: relative;
@@ -628,12 +629,12 @@ select {
     cursor: pointer;
 }
 
-#flip.flipped #flipInner {
+.flip.flipped .flipInner {
     transform: rotateY(180deg);
 }
 
-#flipFront,
-#flipBack {
+.flipFront,
+.flipBack {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -647,54 +648,54 @@ select {
     box-sizing: border-box;
 }
 
-#flipFront {
+.flipFront {
     background: #f5f3e8;
     color: black;
     font-weight: 600;
     font-size: 1.2rem;
 }
 
-#flipBack { 
+.flipBack { 
     transform: rotateY(180deg);
     color: white;
 }
 
-#flip:nth-of-type(1) #flipBack {
+.flip:nth-of-type(1) .flipBack {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/hanfu.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;   
 }
 
-#flip:nth-of-type(2) #flipBack {
+.flip:nth-of-type(2) .flipBack {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/tea.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;   
 }
 
-#flip:nth-of-type(3) #flipBack {
+.flip:nth-of-type(3) .flipBack {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/calligraphy.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;   
 }
 
-#flip:nth-of-type(4) #flipBack {
+.flip:nth-of-type(4) .flipBack {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/festival.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;   
 }
 
-#flip:nth-of-type(5) #flipBack {
+.flip:nth-of-type(5) .flipBack {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/instrument.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;   
 }
 
-#flip:nth-of-type(6) #flipBack {
+.flip:nth-of-type(6) .flipBack {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/ipman.webp');
     background-repeat: no-repeat;
     background-size: cover;
@@ -859,7 +860,7 @@ select {
 
 
 
-@keyframes rotate {
+@keyframes bounce {
     0% {
         transform: scale(1) translateY(0);
     }
@@ -1436,6 +1437,11 @@ body > section > aside > p {
 
 
 @media screen and (max-width: 800px) {
+    footer img {
+        display: none;
+    }
+
+
     body > section > aside > p {
         font-size: 3rem;
     }
@@ -1642,42 +1648,6 @@ body > section > aside > p {
     @keyframes bar5 {
         0%, 100% { height: 6px; }
         50% { height: 11px; }
-    }
-}
-
-/*to unhide menu items*/
-/* .menuShow{display:block;} */
-
-
-#durianId {
-    position: relative;
-    width: 10vw;
-    cursor: pointer;
-}
-
-#durianId.animation {
-    animation: durianFrames 0.4s ease-in-out;
-}
-
-@keyframes durianFrames {
-    0% {
-        rotate: 0
-    }
-
-    25% {
-        rotate: 90deg
-    }
-
-    50% {
-        rotate: 180deg
-    }
-
-    75% {
-        rotate: 270deg
-    }
-
-    100% {
-        rotate: 360deg
     }
 }
 
