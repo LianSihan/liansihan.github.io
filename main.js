@@ -23,6 +23,9 @@ const drum2 = new Audio("audio/drum2.mp3");
 const travelMusic = new Audio("audio/travel.mp3");
 const win = new Audio("audio/win.mp3");
 const enemy = new Audio("audio/enemy.mp3");
+const oof = new Audio("audio/oof.mp3");
+const lose = new Audio("audio/lose.mp3");
+const guzheng = new Audio("audio/guzheng.mp3");
 
 musicBtn.addEventListener("click", function () {
     if (backgroundMusic.paused) {
@@ -43,8 +46,6 @@ function hideall() { //function to hide all pages
 }
 
 function show(pgno) { //function to show selected page no
-    drum.currentTime = 0;
-    drum.play();
     hideall();
     //select the page based on the parameter passed in
     let onepage = document.querySelector("#page" + pgno);
@@ -63,22 +64,30 @@ homebtn.addEventListener("click", function () {
         }, 2000);
     }
     typeWriter(title, bar, 'CHINA', 150);
+    drum.currentTime = 0;
+    drum.play();
 });
 page1btn.addEventListener("click", function () {
     show(1);
     navMenu.classList.remove("menuShow");
     typeWriter(title, bar, 'CHINA', 150);
+    drum.currentTime = 0;
+    drum.play();
 });
 page2btn.addEventListener("click", function () {
     show(2);
     navMenu.classList.remove("menuShow");
     typeWriter(title, bar, 'Major Dynasties', 125);
     calculateAndSetHeight();
+    drum.currentTime = 0;
+    drum.play();
 });
 page3btn.addEventListener("click", function () {
     show(3);
     navMenu.classList.remove("menuShow");
     typeWriter(title, bar, 'Famous Inventions', 125);
+    drum.currentTime = 0;
+    drum.play();
 });
 page4btn.addEventListener("click", function () {
     show(4);
@@ -87,16 +96,22 @@ page4btn.addEventListener("click", function () {
     ballContainerWidth = ballContainer.offsetWidth - parseFloat(ballContainerStyle.paddingLeft) - parseFloat(ballContainerStyle.paddingRight) - ball.offsetWidth;
     typeWriter(title, bar, 'Silk Road & Trade', 100);
     UpdateBallContentAndImage();
+    drum.currentTime = 0;
+    drum.play();
 });
 page5btn.addEventListener("click", function () {
     show(5);
     navMenu.classList.remove("menuShow");
     typeWriter(title, bar, 'Ancient Chinese Culture', 100);
+    drum.currentTime = 0;
+    drum.play();
 });
 page6btn.addEventListener("click", function () {
     show(6);
     navMenu.classList.remove("menuShow");
     typeWriter(title, bar, 'Game', 100);
+    drum.currentTime = 0;
+    drum.play();
 });
 page1Content.forEach(content => {
     content.querySelector("button:nth-of-type(1)").addEventListener("click", () => {
@@ -104,11 +119,15 @@ page1Content.forEach(content => {
         navMenu.classList.remove("menuShow");
         typeWriter(title, bar, 'Major Dynasties', 125);
         calculateAndSetHeight();
+        drum.currentTime = 0;
+        drum.play();
     });
     content.querySelector("button:nth-of-type(2)").addEventListener("click", () => {
         show(3);
         navMenu.classList.remove("menuShow");
         typeWriter(title, bar, 'Famous Inventions', 125);
+        drum.currentTime = 0;
+        drum.play();
     });
     content.querySelector("button:nth-of-type(3)").addEventListener("click", () => {
         show(4);
@@ -117,16 +136,22 @@ page1Content.forEach(content => {
         ballContainerWidth = ballContainer.offsetWidth - parseFloat(ballContainerStyle.paddingLeft) - parseFloat(ballContainerStyle.paddingRight) - ball.offsetWidth;
         typeWriter(title, bar, 'Silk Road & Trade', 100);
         UpdateBallContentAndImage();
+        drum.currentTime = 0;
+        drum.play();
     });
     content.querySelector("button:nth-of-type(4)").addEventListener("click", () => {
         show(5);
         navMenu.classList.remove("menuShow");
         typeWriter(title, bar, 'Ancient Chinese Culture', 100);
+        drum.currentTime = 0;
+        drum.play();
     });
     content.querySelector("button:nth-of-type(5)").addEventListener("click", () => {
         show(6);
         navMenu.classList.remove("menuShow");
         typeWriter(title, bar, 'Game', 100);
+        drum.currentTime = 0;
+        drum.play();
     });
 });
 
@@ -150,6 +175,8 @@ const flipCards = document.querySelectorAll('#flip');
             
 flipCards.forEach(card => {
     card.addEventListener('click', function() {
+        dot.currentTime = 0;
+        dot.play();
         this.classList.toggle('flipped');
     });
 });
@@ -591,6 +618,8 @@ function startCombat() {
         time.textContent = combatTimer;
 
         if (combatTimer <= 0) {
+            lose.currentTime = 0;
+            lose.play();
             endMessage.innerHTML = `
                 <p>Game Over! You were robbed by the bandits.</p>
             `;
@@ -621,6 +650,9 @@ function spawnEnemy() {
         if (enemy.style.opacity === "0") {
             return; 
         }
+
+        oof.currentTime = 0;
+        oof.play();
 
         enemy.classList.add("animation");
         enemy.style.opacity = "0";
@@ -743,15 +775,15 @@ var ballX = ballY = 0; //assign initial position of ball
 
 //functions to update variables to control ball position
 function ResetPos() {
-    dot.currentTime = 0;
-    dot.play();
+    guzheng.currentTime = 0;
+    guzheng.play();
     ballX=ballY=0; //reset to zero
     UpdateBallStyle();
 }
 
 function MovePos(leftInc) {
-    dot.currentTime = 0;
-    dot.play();
+    guzheng.currentTime = 0;
+    guzheng.play();
     ballX += leftInc;
     UpdateBallStyle();
 }
