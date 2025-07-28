@@ -41,6 +41,11 @@ body footer {
     justify-content: center;
     padding: 25px 0;
 }
+footer img {
+    width: 150px;
+    height: 150px;
+    border-radius: 25%;
+}
 
 body header {
     background: black;
@@ -655,42 +660,42 @@ select {
 }
 
 #flip:nth-of-type(1) #flipBack {
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/hanfu.webp');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/hanfu.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;   
 }
 
 #flip:nth-of-type(2) #flipBack {
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/tea.webp');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/tea.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;   
 }
 
 #flip:nth-of-type(3) #flipBack {
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/calligraphy.webp');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/calligraphy.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;   
 }
 
 #flip:nth-of-type(4) #flipBack {
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/festival.webp');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/festival.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;   
 }
 
 #flip:nth-of-type(5) #flipBack {
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/instrument.webp');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/instrument.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;   
 }
 
 #flip:nth-of-type(6) #flipBack {
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('../images/ipman.webp');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../images/ipman.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;   

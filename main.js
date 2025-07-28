@@ -391,7 +391,7 @@ function CheckAns() {
     }
 
     const q3 = document.querySelector('input[name="q3"]').value.trim().toLowerCase();
-    if (q3 === "han") {
+    if (q3 === "han" || q3 === "handynasty") {
         score++;
     }
 
@@ -1069,3 +1069,16 @@ window.addEventListener('load', function() {
 
 
 
+document.addEventListener("click", enterFullscreen);
+
+function enterFullscreen() { //must be called by user generated event
+    if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+        document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+        document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+        document.documentElement.msRequestFullscreen();
+    }
+}
