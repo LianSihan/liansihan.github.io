@@ -3,11 +3,11 @@
     "short_name": "China",
     "start_url": "index.html",
     "display": "standalone",
-    "background_color": "#ffffff00",
-    "theme_color": "#00FF00",
+    "background_color": "#000",
+    "theme_color": "#000",
     "icons": [
         { 
-            "src": "china emoji.png",
+            "src": "chinaEmoji.png",
             "sizes": "64x64",
             "type": "image/png"
         }
