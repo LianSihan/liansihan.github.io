@@ -1437,6 +1437,28 @@ body > section > aside > p {
 
 
 @media screen and (max-width: 800px) {
+
+    .timelineline {
+        left: 35%;
+    }
+
+    .date {
+        width: 25%;
+    }
+
+    .dot {
+        left: 35%;
+    }
+
+    .dynasty {
+        margin-left: 45%;
+        width: 55%;
+    }
+
+
+
+
+
     footer img {
         display: none;
     }
