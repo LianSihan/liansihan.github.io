@@ -516,8 +516,8 @@ input[type="radio"] {
 }
 
 /* check if its clicked to highlight it */
-input[type="checkbox"]:checked + #option,
-input[type="radio"]:checked + #option {
+input[type="checkbox"]:checked + .option,
+input[type="radio"]:checked + .option {
     padding: 10px;
     border: 2px solid rgb(184, 168, 143);
     border-radius: 10px;
