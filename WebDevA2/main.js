@@ -181,7 +181,7 @@ flipCards.forEach(function(card) {
     });
 });
 
-
+/* When can see the dynasties, itll appear/float up to their original location, else itll be hidden */
 document.addEventListener("DOMContentLoaded", function () {
     const dynasties = document.querySelectorAll('.dynasty');
     const date = document.querySelectorAll('.date');
@@ -302,6 +302,7 @@ const dynastyInfo = {
     }
 };
 
+/* Show dynasty info but using sprites to show which part the iamge is at using col and row */
 document.querySelectorAll('.dynasty button').forEach(function (button) {
     button.addEventListener('click', function () {
         gong.currentTime = 0;
@@ -323,7 +324,7 @@ document.getElementById('closebutton').addEventListener('click', function () {
     document.getElementById('dynastyinfo').classList.toggle('show');
 });
 
-
+/* remove tile to show content behind when clicked */
 const tiles = document.querySelectorAll('.blockingtile');
 tiles.forEach(function (tile) {
     tile.addEventListener('click', function () {
@@ -369,6 +370,7 @@ let score = 0;
 
 submit.addEventListener("click", CheckAns);
 
+/* Check Quiz Submit */
 function CheckAns() {
     score = 0;
     const q1 = document.querySelector('input[name="q1"]').value.trim();
@@ -419,6 +421,7 @@ function CheckAns() {
     quizResult.innerHTML = "<h2>Your Score: " + score + "/6</h2>";
 }
 
+/* Reset quiz inputs */
 reset.addEventListener("click", function () {
     // Reset all input fields
     document.querySelectorAll("input").forEach(function (input) {
@@ -441,7 +444,7 @@ reset.addEventListener("click", function () {
 
 
 
-
+/* Game Objects */
 const locations = ['China', 'India', 'Uzbekistan', 'Persia', 'Turkey', 'Italy'];
 const items = {
     'China': [
@@ -528,6 +531,7 @@ restartBtn.addEventListener("click", function() {
     resetGame();
 });
 
+/* 50% chance to fight or travel */
 function travel() {
     if (combat) {
         return;
@@ -545,12 +549,14 @@ function travel() {
     }
 }
 
+/* Update user stats */
 function updateStats() {
     where.innerHTML = '<p>Location: ' + locations[player] + '</p>';
     goldAmt.innerHTML = '<p>Gold: ' + gold + '</p>';
     progress.innerHTML = '<p>Progress: ' + (player + 1) + '/6</p>';
 }
 
+/* Update shop info based on location*/
 function updateShop() {
     const shopItems = items[locations[player]];
     shopItems.forEach(function (item, index) {
@@ -568,6 +574,7 @@ function updateShop() {
     });
 }
 
+/* check if can buy item */
 function buyItem(name, price) {
     if (gold >= price) {
         gold -= price;
@@ -585,6 +592,7 @@ function buyItem(name, price) {
     }
 }
 
+/* Create divs and make them under inventoryItems */
 function updateInventory() {
     const inv = document.getElementById('inventoryItems');
     inv.innerHTML = '';
@@ -607,6 +615,7 @@ function updateInventory() {
     }
 }
 
+/* When user meets combat, spawns 3 enemies */
 function startCombat() {
     combat = true;
     mainArea.classList.add("gone");
@@ -633,6 +642,7 @@ function startCombat() {
     }, 1000);
 }
 
+/* Spawn an enemy */
 function spawnEnemy() {
     const enemy = document.createElement("img");
     enemy.classList.add("enemy");
@@ -674,6 +684,7 @@ function spawnEnemy() {
     banditArea.appendChild(enemy);
 }
 
+/* Go to next location */
 function moveNext() {
     player++;
 
@@ -687,6 +698,7 @@ function moveNext() {
     }
 }
 
+/* When player wins */
 function endGame() {
     updateStats();
 
@@ -729,6 +741,7 @@ function endGame() {
     gameOverArea.classList.remove("gone");
 }
 
+/* Reset player stats etc */
 function resetGame() {
     player = 0;
     gold = 100;
@@ -819,7 +832,7 @@ rightBtn.addEventListener("click", function () {
 
 resetBtn.addEventListener("click", ResetPos);
 
-
+/* move the ball left and right using A and D */
 document.addEventListener('keydown', function (e) {
     if (e.repeat) return;
 
@@ -833,6 +846,7 @@ document.addEventListener('keydown', function (e) {
     }
 });
 
+/* Region Information Object */
 const regionInfo = {
     "China": {
         title: "China - The Birthplace of Silk and Innovation",
@@ -931,6 +945,7 @@ ballContent.innerHTML = '<h1>' + regionInfo.China.title + '</h1>' +
     '<p class="description">' + regionInfo.China.cultureDescription + '</p></article>' +
     '<aside><img src="' + regionInfo.China.cultureImage + '" alt="culture Image"></aside>';
 
+/* Update the content in silk road based on the flag, info is retrieved from the object and html is changed */
 function UpdateBallContentAndImage() {
     const cutOff = ballContainerWidth / 5;
 
@@ -1010,7 +1025,7 @@ function UpdateBallContentAndImage() {
 }
 
 
-
+/* Update details when window is resized */
 window.addEventListener('resize', function () {
     let ratio = ballX / ballContainerWidth;
     const ballContainerStyle = getComputedStyle(ballContainer);
@@ -1023,6 +1038,7 @@ window.addEventListener('resize', function () {
 
 let currentTypingID = 0;
 
+/* Keep Typing until I type finish the text */
 function typeWriter(title, bar, text, timeout) {
     const thisTypingID = ++currentTypingID; // unique ID per call
     let i = 0;
@@ -1042,6 +1058,7 @@ function typeWriter(title, bar, text, timeout) {
 
 const rightContainer = document.querySelector('#page2 > div > section:first-of-type');
 
+/* calculate maxheight for timeline container or it will be too long */
 function calculateAndSetHeight() {
     if (window.innerWidth > 800) {
         rightContainer.style.maxHeight = 1 + 'px';
@@ -1068,7 +1085,7 @@ window.addEventListener('load', function() {
 
 
 
-
+/* User Click = fullscreen */
 document.addEventListener("click", enterFullscreen);
 
 function enterFullscreen() { //must be called by user generated event

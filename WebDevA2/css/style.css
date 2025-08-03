@@ -5,6 +5,7 @@
     font-family: 'CrimsonText', 'Georgia', serif;
 }
 
+/* My Font */
 @font-face {
     font-family: 'CrimsonText';
     src: url('../fonts/CrimsonText-Regular.ttf') format('ttf');
@@ -17,7 +18,8 @@
     height: auto;
 }
 
-body >nav {
+
+body > nav {
     display: none;
 }
 
@@ -259,6 +261,7 @@ body header button img:hover {
     flex-direction: row;
     justify-content: center;
     font-weight: bold;
+    /* I tired importing own chinese font, but it didnt work and chinese font was over 7mb so im using a better looking one than default */
     font-family: 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
 }
 
@@ -506,11 +509,13 @@ body header button img:hover {
     cursor: pointer;
 }
 
+/* remove the boxes for quiz as we use label so we can click */
 input[type="checkbox"],
 input[type="radio"] {
     display: none;
 }
 
+/* check if its clicked to highlight it */
 input[type="checkbox"]:checked + #option,
 input[type="radio"]:checked + #option {
     padding: 10px;
@@ -655,6 +660,7 @@ select {
     font-size: 1.2rem;
 }
 
+/* flip it by 180 default so when we click we can flip it back */
 .flipBack { 
     transform: rotateY(180deg);
     color: white;
@@ -837,6 +843,7 @@ select {
     animation: spin 1s infinite;
 }
 
+/* Rotate the enemies whe they die */
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -859,7 +866,7 @@ select {
 
 
 
-
+/* Chinese Logo bounces on top right */
 @keyframes bounce {
     0% {
         transform: scale(1) translateY(0);
@@ -1007,6 +1014,7 @@ body > section > aside > p {
     animation: blink 1s infinite;
 }
 
+/* Typing Cursor Blinking */
 @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
@@ -1023,6 +1031,7 @@ body > section > aside > p {
     justify-content: center;
     align-items: center;
     transition: left 0.4s ease;
+    /* because the container is bigger than the image so i need to use drop shadow instead of box shadow */
     filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8));
 }
 
@@ -1397,6 +1406,7 @@ body > section > aside > p {
 .playing #bar4 { animation: bar4 1.4s infinite; }
 .playing #bar5 { animation: bar5 1.3s infinite; }
 
+/* Varying heights for each bar for the music player */
 @keyframes bar1 {
     0%, 100% { height: 10px; }
     50% { height: 25px; }
@@ -1674,7 +1684,7 @@ body > section > aside > p {
 }
 
 
-
+/* Change the look of the scroll bar on default page on the right */
 html::-webkit-scrollbar {
     width: 16px;
     background: #2c2c2c;
