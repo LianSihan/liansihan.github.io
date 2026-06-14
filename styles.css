@@ -561,3 +561,13 @@ a { color: inherit; }
 .project .project-head h2 { margin: 0; }
 .project .project-foot { margin-top: 1.6rem; }
 .project .project-foot p { margin: 0 0 1.1rem; max-width: 62ch; }
+
+/* ---- contribution bullets (project highlights) ---- */
+.contrib {
+  margin: 0 0 1.4rem;
+  padding-left: 1.15rem;
+  max-width: 62ch;
+  color: var(--text);
+}
+.contrib li { margin-bottom: 0.5rem; }
+.contrib li::marker { color: var(--coral); }

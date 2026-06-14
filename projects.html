@@ -26,77 +26,73 @@
     <section class="wrap page-head">
       <p class="eyebrow">Notable projects · 2024–2026</p>
       <h1>Projects</h1>
-      <p>Three projects I'm proud of. Play the web build right here, or follow the links to source, more info, and downloads.</p>
+      <p>Three projects I'm proud of. The first plays right here in the browser; the other two are downloads on itch.io.</p>
     </section>
 
-    <!--
-      NAMES: "Lights, Camera, Fight!" is the real title. The other two are
-      working titles you can rename — just edit the <h2> text.
-      To make a project playable: set data-src on its .game to a local build
-      path (games/<name>/index.html) or leave it empty for "coming soon".
-    -->
     <section class="wrap">
 
-      <!-- ===== PROJECT 01 — playable ===== -->
+      <!-- ===== PROJECT 01 — playable web build ===== -->
       <article class="project">
         <div class="project-head">
           <span class="project-index">01 / 03</span>
-          <h2>Lights, Camera, Fight!</h2>
+          <h2>Lights, Camera, Action!</h2>
         </div>
         <div class="game"
              data-src="games/lights-camera-fight/index.html"
              data-poster="https://img.itch.zone/aW1nLzI3ODA5MzkwLnBuZw==/original/02xJ%2Fc.png"
-             data-title="Lights, Camera, Fight! — playable build"
+             data-title="Lights, Camera, Action! — playable build"
              style="--ratio: 16 / 9;">
           <div class="game-poster"><button type="button" class="game-play">&#9658; Play in browser</button></div>
           <span class="game-hint">Loads on click · ~106 MB build</span>
         </div>
         <div class="project-foot">
-          <p class="meta" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin:1.2rem 0 0.9rem;">2026 · Unity · 3D · Team (programming)</p>
-          <p>A 3D action-adventure where a kid's imagination turns the world into boss battles. I built the responsive combat system — attacking, blocking and parrying — plus custom Post Processing, HLSL shaders and Shader Graph networks for the visual effects, including custom lighting and vertex displacement.</p>
-          <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">HLSL</span><span class="tag">Shader Graph</span></div>
+          <p class="meta" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin:1.2rem 0 0.9rem;">2026 · Unity · 3D · Team</p>
+          <p>A 3D action-adventure where a kid's imagination turns the real world into boss battles as he films his own heroic quest. I built a custom combat system in Unity for this team-based project.</p>
+          <ul class="contrib">
+            <li>Designed, implemented, and optimized a complex, two-phase boss AI state machine in Unity/C#.</li>
+            <li>Built a custom dialogue system and audio integration under tight deadlines.</li>
+          </ul>
+          <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">Boss AI</span><span class="tag">Dialogue</span></div>
           <div class="linkrow">
             <a class="link-btn solid" href="https://cottonoun.itch.io/lights-camera-fight" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M9 5H5v14h14v-4"/></svg> itch.io page</a>
-            <a class="link-btn" href="https://bit.ly/3D_Fighting_Game" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M9 5H5v14h14v-4"/></svg> More info</a>
           </div>
         </div>
       </article>
 
-      <!-- ===== PROJECT 02 — add a WebGL build later ===== -->
+      <!-- ===== PROJECT 02 — Unity, download only ===== -->
       <article class="project">
         <div class="project-head">
           <span class="project-index">02 / 03</span>
-          <!-- EDIT: rename this working title -->
-          <h2>Switchback <span style="font-family:var(--mono);font-size:0.5em;color:var(--muted);letter-spacing:0.08em;vertical-align:middle;">2D PLATFORMER</span></h2>
+          <h2>Vergil Adventure</h2>
         </div>
-        <div class="game" data-src="" data-poster="" data-title="2D Platformer — playable build" style="--ratio: 16 / 9;">
-          <div class="game-poster"><button type="button" class="game-play">&#9658; Play in browser</button></div>
-          <span class="game-hint">Add a WebGL build to enable play</span>
-        </div>
-        <div class="project-foot">
-          <p class="meta" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin:1.2rem 0 0.9rem;">Unity · C# · 2D</p>
-          <p>A 2D platformer with responsive movement and smooth animations. Enemies use dynamic, pluggable finite state machines (FSMs), so their behaviour can be swapped and tuned cleanly without rewriting the AI.</p>
-          <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">FSM AI</span></div>
+        <div class="project-foot" style="margin-top:0;">
+          <p class="meta" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin:0 0 0.9rem;">Unity · C# · Download</p>
+          <p>A stylized, fast-paced 3D hack-and-slash adventure inspired by Devil May Cry and Umamusume, featuring a custom combat and parry system.</p>
+          <ul class="contrib">
+            <li>Developed custom Post Processing, HLSL shaders and Shader Graph networks to create high-fidelity visual effects, including custom lighting models and vertex displacement.</li>
+          </ul>
+          <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">HLSL</span><span class="tag">Shader Graph</span></div>
           <div class="linkrow">
-            <a class="link-btn solid" href="https://bit.ly/2D_Platformer" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M9 5H5v14h14v-4"/></svg> More info</a>
-            <a class="link-btn" href="https://dedswet.itch.io" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M9 5H5v14h14v-4"/></svg> itch.io</a>
+            <a class="link-btn solid" href="https://dedswet.itch.io/shaders-n-fighting" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg> Download on itch.io</a>
           </div>
         </div>
       </article>
 
-      <!-- ===== PROJECT 03 — native desktop, download only ===== -->
+      <!-- ===== PROJECT 03 — C++/OpenGL, download only ===== -->
       <article class="project">
         <div class="project-head">
           <span class="project-index">03 / 03</span>
-          <!-- EDIT: rename this working title -->
-          <h2>Flicker <span style="font-family:var(--mono);font-size:0.5em;color:var(--muted);letter-spacing:0.08em;vertical-align:middle;">OPENGL HORROR</span></h2>
+          <h2>Weeping Scarce</h2>
         </div>
         <div class="project-foot" style="margin-top:0;">
-          <p class="meta" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin:0 0 0.9rem;">C++ · OpenGL · Desktop build</p>
-          <p>A first-person horror game built from scratch in C++ and OpenGL. I wrote a custom first-person camera with movement logic and head-bobbing, and handled pitch and yaw rotations using transformation matrices. It's a native build, so it's a download rather than an in-browser play.</p>
-          <div class="tags"><span class="tag">C++</span><span class="tag">OpenGL</span><span class="tag">First-person</span></div>
+          <p class="meta" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin:0 0 0.9rem;">C++ · OpenGL · Download</p>
+          <p>A tense first-person horror game inspired by the Weeping Angels, where players must escape a dark house before the stationary statues awaken.</p>
+          <ul class="contrib">
+            <li>Developed a custom First-Person Camera System in C++ and OpenGL, implementing movement logic and head-bobbing effects.</li>
+          </ul>
+          <div class="tags"><span class="tag">C++</span><span class="tag">OpenGL</span><span class="tag">First-person</span><span class="tag">Horror</span></div>
           <div class="linkrow">
-            <a class="link-btn solid" href="https://bit.ly/OpenGL_Horror_Game" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg> More info / download</a>
+            <a class="link-btn solid" href="https://dedswet.itch.io/weeping-scarce" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg> Download on itch.io</a>
           </div>
         </div>
       </article>
