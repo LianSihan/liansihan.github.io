@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lian Sihan (DedSwet) — Game Programmer</title>
+  <meta name="description" content="Lian Sihan (DedSwet) — aspiring game programmer at Nanyang Polytechnic. Play my games in the browser." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <a class="mark" href="index.html">Lian&nbsp;<span>Sihan</span></a>
+    <nav class="links" aria-label="Primary">
+      <a href="index.html" aria-current="page">About</a>
+      <a href="projects.html">Projects</a>
+    </nav>
+  </header>
+
+  <!-- ============ HERO (WebGL background) ============ -->
+  <section class="hero" aria-label="Intro">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="veil" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <p class="eyebrow">Aspiring Game Programmer · aka DedSwet</p>
+      <h1>Lian<br />Sihan<em>.</em></h1>
+      <p class="tagline">Game programmer and student at Nanyang Polytechnic with a strong foundation in C++ and C#. I build immersive gameplay — and you can play my latest one right here.</p>
+      <div class="hero-actions" style="margin-top:2.2rem;display:flex;gap:0.8rem;flex-wrap:wrap;">
+        <a class="btn btn-primary" href="#now-playing">&#9658; Play my game</a>
+        <a class="btn btn-ghost" href="projects.html">Other projects <span class="arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <main>
+  <!-- ============ ABOUT ============ -->
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">About</p>
+        <h2>Hi — I'm Lian.</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-bio">
+          <p>I'm an <strong>aspiring game programmer</strong> and a Game Development &amp; Technology student at Nanyang Polytechnic, with a strong foundation in C++ and C#.</p>
+          <p>I'm passionate about building immersive gameplay experiences — combat systems, custom shaders, camera work — and I've shipped projects as part of a team. Most recently I helped build <em>Lights, Camera, Fight!</em>, a 3D action-adventure made in Unity.</p>
+          <p>I'm currently looking for opportunities to grow as a programmer. If that sounds useful to you, let's talk.</p>
+        </div>
+
+        <aside class="facts" aria-label="Quick facts">
+          <div class="row"><span class="k">Role</span><span class="v">Game Programmer</span></div>
+          <div class="row"><span class="k">Study</span><span class="v">Dip. Game Dev &amp; Tech · NYP</span></div>
+          <div class="row"><span class="k">Code</span><span class="v">C++ · C# · JavaScript · Java</span></div>
+          <div class="row"><span class="k">Tools</span><span class="v">Unity · Unreal · Git · Adobe Audition</span></div>
+          <div class="row"><span class="k">itch</span><span class="v">dedswet.itch.io</span></div>
+          <div class="row"><span class="k">Email</span><span class="v">liansihan2006@gmail.com</span></div>
+        </aside>
+      </div>
+
+      <!--
+        ============================================================
+        PLAY-ON-SITE SETUP  (Lights, Camera, Fight! — Unity WebGL)
+        1. Unzip Web_Build.zip. You'll get a folder named "Web Build".
+        2. Rename that folder to:  lights-camera-fight
+           (DO NOT rename the files inside it.)
+        3. Put it inside a "games/" folder next to this page, so the
+           file lives at:  games/lights-camera-fight/index.html
+        The player below already points there.
+
+        IMPORTANT — your build uses Brotli (.br) compression, which needs
+        the host to send special headers, or it won't load. Easiest paths:
+          • Deploy to Netlify and include the netlify.toml in this folder
+            (already written for you) — it sets the headers automatically.
+          • OR re-export from Unity with Build Settings > Player >
+            Publishing Settings > Compression Format = Disabled
+            (or tick "Decompression Fallback"). Then it runs on ANY host
+            and on a plain local server.
+        GitHub Pages can't set headers, so the Brotli build won't run there
+        unless you use the re-export option above.
+        See README.md for step-by-step deploy notes.
+        ============================================================
+      -->
+
+      <!-- ===== NOW PLAYING — featured game ===== -->
+      <article class="featured" id="now-playing" aria-label="Featured game">
+        <div class="game"
+             data-src="games/lights-camera-fight/index.html"
+             data-poster="https://img.itch.zone/aW1nLzI3ODA5MzkwLnBuZw==/original/02xJ%2Fc.png"
+             data-title="Lights, Camera, Fight! — playable build"
+             style="--ratio: 16 / 9; border-radius: 0; border: none; border-bottom: 1px solid var(--line);">
+          <div class="game-poster">
+            <button type="button" class="game-play">&#9658; Play in browser</button>
+          </div>
+          <span class="game-hint">Loads on click · keyboard supported · ~106 MB build</span>
+        </div>
+
+        <div class="featured-body">
+          <span class="label">Now Playing — Featured Game</span>
+          <h3>Lights, Camera, Fight!</h3>
+          <p>A 3D action-adventure where a kid's imagination turns the real world into boss battles, as he films his own heroic quest to save his mom. Built in Unity with a custom combat system. A team project where I worked on the programming.</p>
+          <div class="tags">
+            <span class="tag">Unity</span><span class="tag">C#</span><span class="tag">3D</span><span class="tag">Action-Adventure</span><span class="tag">Team</span>
+          </div>
+          <div class="linkrow">
+            <a class="link-btn solid" href="https://cottonoun.itch.io/lights-camera-fight" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M9 5H5v14h14v-4"/></svg>
+              Play / download on itch.io
+            </a>
+            <a class="link-btn" href="https://bit.ly/3D_Fighting_Game" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M9 5H5v14h14v-4"/></svg>
+              More info
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <div class="center-cta">
+        <a class="btn btn-ghost" href="projects.html">Other projects <span class="arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- ============ FOOTER / CONTACT ============ -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <span class="big">Let's build something.</span>
+        <nav class="links" aria-label="Footer">
+          <a href="mailto:liansihan2006@gmail.com">Email</a>
+          <a href="https://dedswet.itch.io" target="_blank" rel="noopener">itch.io</a>
+          <a href="https://linkedin.com/in/liansihan" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="projects.html">Projects</a>
+        </nav>
+      </div>
+      <p class="fine">+65 8886 5821 · liansihan2006@gmail.com · © 2026 Lian Sihan (DedSwet)</p>
+    </div>
+  </footer>
+
+  <script src="webgl.js"></script>
+  <script src="games.js"></script>
+  <script>initFlowField('hero-canvas');</script>
+</body>
+</html>

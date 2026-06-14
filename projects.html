@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Lian Sihan (DedSwet)</title>
+  <meta name="description" content="Game projects by Lian Sihan (DedSwet) — play in the browser or grab the downloads." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <a class="mark" href="index.html">Lian&nbsp;<span>Sihan</span></a>
+    <nav class="links" aria-label="Primary">
+      <a href="index.html">About</a>
+      <a href="projects.html" aria-current="page">Projects</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap page-head">
+      <p class="eyebrow">Notable projects · 2024–2026</p>
+      <h1>Projects</h1>
+      <p>Three projects I'm proud of. Play the web build right here, or follow the links to source, more info, and downloads.</p>
+    </section>
+
+    <!--
+      NAMES: "Lights, Camera, Fight!" is the real title. The other two are
+      working titles you can rename — just edit the <h2> text.
+      To make a project playable: set data-src on its .game to a local build
+      path (games/<name>/index.html) or leave it empty for "coming soon".
+    -->
+    <section class="wrap">
+
+      <!-- ===== PROJECT 01 — playable ===== -->
+      <article class="project">
+        <div class="project-head">
+          <span class="project-index">01 / 03</span>
+          <h2>Lights, Camera, Fight!</h2>
+        </div>
+        <div class="game"
+             data-src="games/lights-camera-fight/index.html"
+             data-poster="https://img.itch.zone/aW1nLzI3ODA5MzkwLnBuZw==/original/02xJ%2Fc.png"
+             data-title="Lights, Camera, Fight! — playable build"
+             style="--ratio: 16 / 9;">
+          <div class="game-poster"><button type="button" class="game-play">&#9658; Play in browser</button></div>
+          <span class="game-hint">Loads on click · ~106 MB build</span>
+        </div>
+        <div class="project-foot">
+          <p class="meta" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin:1.2rem 0 0.9rem;">2026 · Unity · 3D · Team (programming)</p>
+          <p>A 3D action-adventure where a kid's imagination turns the world into boss battles. I built the responsive combat system — attacking, blocking and parrying — plus custom Post Processing, HLSL shaders and Shader Graph networks for the visual effects, including custom lighting and vertex displacement.</p>
+          <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">HLSL</span><span class="tag">Shader Graph</span></div>
+          <div class="linkrow">
+            <a class="link-btn solid" href="https://cottonoun.itch.io/lights-camera-fight" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M9 5H5v14h14v-4"/></svg> itch.io page</a>
+            <a class="link-btn" href="https://bit.ly/3D_Fighting_Game" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M9 5H5v14h14v-4"/></svg> More info</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== PROJECT 02 — add a WebGL build later ===== -->
+      <article class="project">
+        <div class="project-head">
+          <span class="project-index">02 / 03</span>
+          <!-- EDIT: rename this working title -->
+          <h2>Switchback <span style="font-family:var(--mono);font-size:0.5em;color:var(--muted);letter-spacing:0.08em;vertical-align:middle;">2D PLATFORMER</span></h2>
+        </div>
+        <div class="game" data-src="" data-poster="" data-title="2D Platformer — playable build" style="--ratio: 16 / 9;">
+          <div class="game-poster"><button type="button" class="game-play">&#9658; Play in browser</button></div>
+          <span class="game-hint">Add a WebGL build to enable play</span>
+        </div>
+        <div class="project-foot">
+          <p class="meta" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin:1.2rem 0 0.9rem;">Unity · C# · 2D</p>
+          <p>A 2D platformer with responsive movement and smooth animations. Enemies use dynamic, pluggable finite state machines (FSMs), so their behaviour can be swapped and tuned cleanly without rewriting the AI.</p>
+          <div class="tags"><span class="tag">Unity</span><span class="tag">C#</span><span class="tag">FSM AI</span></div>
+          <div class="linkrow">
+            <a class="link-btn solid" href="https://bit.ly/2D_Platformer" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M9 5H5v14h14v-4"/></svg> More info</a>
+            <a class="link-btn" href="https://dedswet.itch.io" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6M20 4l-9 9M9 5H5v14h14v-4"/></svg> itch.io</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ===== PROJECT 03 — native desktop, download only ===== -->
+      <article class="project">
+        <div class="project-head">
+          <span class="project-index">03 / 03</span>
+          <!-- EDIT: rename this working title -->
+          <h2>Flicker <span style="font-family:var(--mono);font-size:0.5em;color:var(--muted);letter-spacing:0.08em;vertical-align:middle;">OPENGL HORROR</span></h2>
+        </div>
+        <div class="project-foot" style="margin-top:0;">
+          <p class="meta" style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);margin:0 0 0.9rem;">C++ · OpenGL · Desktop build</p>
+          <p>A first-person horror game built from scratch in C++ and OpenGL. I wrote a custom first-person camera with movement logic and head-bobbing, and handled pitch and yaw rotations using transformation matrices. It's a native build, so it's a download rather than an in-browser play.</p>
+          <div class="tags"><span class="tag">C++</span><span class="tag">OpenGL</span><span class="tag">First-person</span></div>
+          <div class="linkrow">
+            <a class="link-btn solid" href="https://bit.ly/OpenGL_Horror_Game" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg> More info / download</a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="wrap center-cta" style="padding-bottom: clamp(4rem,10vh,8rem);">
+      <a class="btn btn-primary" href="mailto:liansihan2006@gmail.com">Get in touch <span class="arrow">&rarr;</span></a>
+      &nbsp;&nbsp;
+      <a class="btn btn-ghost" href="index.html"><span class="arrow" style="transform:scaleX(-1)">&rarr;</span> Back to about</a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <span class="big">Let's build something.</span>
+        <nav class="links" aria-label="Footer">
+          <a href="mailto:liansihan2006@gmail.com">Email</a>
+          <a href="https://dedswet.itch.io" target="_blank" rel="noopener">itch.io</a>
+          <a href="https://linkedin.com/in/liansihan" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="index.html">About</a>
+        </nav>
+      </div>
+      <p class="fine">+65 8886 5821 · liansihan2006@gmail.com · © 2026 Lian Sihan (DedSwet)</p>
+    </div>
+  </footer>
+
+  <script src="games.js"></script>
+</body>
+</html>

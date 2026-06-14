@@ -1,0 +1,29 @@
+# Netlify config — makes the Unity WebGL (Brotli) build load correctly.
+# Without these headers, the browser won't decompress the .br files and
+# the game will fail with a "decompression" / "not gzip/brotli" error.
+#
+# This assumes your build lives at:  games/lights-camera-fight/
+# If you name the folder differently, update the paths below.
+
+[[headers]]
+  for = "/games/lights-camera-fight/Build/*.data.br"
+  [headers.values]
+    Content-Encoding = "br"
+    Content-Type = "application/octet-stream"
+
+[[headers]]
+  for = "/games/lights-camera-fight/Build/*.wasm.br"
+  [headers.values]
+    Content-Encoding = "br"
+    Content-Type = "application/wasm"
+
+[[headers]]
+  for = "/games/lights-camera-fight/Build/*.framework.js.br"
+  [headers.values]
+    Content-Encoding = "br"
+    Content-Type = "application/javascript"
+
+[[headers]]
+  for = "/games/lights-camera-fight/Build/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"
